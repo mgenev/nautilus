@@ -1,0 +1,16 @@
+{{yield}}
+
+<div class="loader "></div>
+
+<div class="photo-list">
+    <ul id="tiles">
+    	{{#each photos as |photo index|}}
+		        <li>
+		        	{{#link-to (query-params p=photo.id)}}
+					<img class="photo-tile" src={{photo.thumbPath}} alt={{album.name}} >
+					{{/link-to}}
+		            <p>{{index}}</p>
+		        </li>
+	    {{/each}}
+    </ul>
+</div>

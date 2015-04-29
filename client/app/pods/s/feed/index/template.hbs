@@ -1,0 +1,24 @@
+{{outlet}}
+<div class="col-xs-6">
+    <div class="row">
+        <div class="page-header">
+            <h3>Feed</h3>
+        </div>
+    </div>
+    <div class="row">
+        <div class="pull-left">
+            {{#link-to 's.feed.status'}}
+                <button class="btn btn-info">Post Status</button>
+            {{/link-to}}
+        </div>
+        <div class="pull-right clearfix">
+            {{date-picker autoclose=true valueFormat="" date=fromDate format="MM-DD-YYYY" allowBlank=true  placeholder="Show posts since"}}&nbsp;<span {{action "clearDate"}} class="glyphicon glyphicon-remove-circle" aria-hidden="true"></span>
+        </div>
+    </div>
+    <div class="row">
+        {{#each model as |status|}}
+            {{status-card status=status}}
+        {{/each}}
+    </div>
+
+</div>

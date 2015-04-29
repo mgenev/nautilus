@@ -1,0 +1,18 @@
+{{outlet}}
+
+<div class="container">
+	<div class="page-header">
+        <h2>Create Post</h2>
+    </div>
+	<form {{action 'createPost' on='submit'}}>
+	    <div class="form-group">
+	        <label for="identification">Title</label>
+	        {{input type="text" value=title class='form-control'}}
+	    </div>
+	    <div class="form-group">
+	        <label for="body">Body</label>
+	        {{textarea value=body class='form-control'}}
+	    </div>
+	    <button class="btn btn-default" {{action 'createPost' model}}>Create Post</button>
+	</form>
+</div>

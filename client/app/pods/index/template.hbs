@@ -1,0 +1,15 @@
+{{outlet}}
+<div class="container">
+	<div class="page-header">
+        <h2>Index</h2>
+    </div>
+
+	{{#if session.isAuthenticated}}
+	<p> Welcome, {{session.user.firstName}} {{session.user.lastName}}</p>
+	<a href="#" {{ action 'invalidateSession' }}>Logout</a>
+	{{else}}
+	  {{! show login panel component}}
+	  {{login-panel}}
+	{{/if}}
+</div>
+
