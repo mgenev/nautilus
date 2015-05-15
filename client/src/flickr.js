@@ -11,10 +11,9 @@ export class Flickr{
     this.http = http;
   }
 
-  activate(){
-    return this.http.jsonp(this.url).then(response => {
-      this.images = response.content.items;
-    });
+  async activate(){
+    let data await this.http.jsonp(this.url);
+    this.images = response.content.items;    
   }
 
   canDeactivate(){
