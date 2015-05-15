@@ -12,11 +12,7 @@ export class Flickr{
   }
 
   async activate(){
-    let data await this.http.jsonp(this.url);
-    this.images = response.content.items;    
-  }
-
-  canDeactivate(){
-    return confirm('Are you sure you want to leave?');
+    let data = await this.http.jsonp(this.url);
+    this.images = data.content.items;
   }
 }
