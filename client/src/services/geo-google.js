@@ -12,7 +12,7 @@ class GeoGoogleService {
   async getGeoposition() {
     return new Promise( (resolve, reject) => {
       let success = pos => resolve(pos.coords);
-        let error = err => console.warn(`ERROR(${err.code}): ${err.message}`);
+      let error = err => console.warn(`ERROR(${err.code}): ${err.message}`);
       navigator.geolocation.getCurrentPosition(success, error);
     });
   }
@@ -29,7 +29,7 @@ class GeoGoogleService {
 
   async getLatLongForAddress(address) {
     let location = await this.geocoding(address);
-    return point(location.results[0].geometry.location);
+    return point(location.content.results[0].geometry.location);
   }
 
   async getAddressForLatLong(latlong) {
@@ -45,19 +45,19 @@ class GeoGoogleService {
       query: 'restaurant'
     };
 
-    var service = new google.maps.places.PlacesService(this.get('map'));
+    var service = new google.maps.places.PlacesService(this.map);
     let markers = [];
     let createMarker = place => {
       let marker = new google.maps.Marker({
-        map: this.get('map'),
+        map: this.map,
         position: place.geometry.location
       });
 
       markers.push(marker);
 
       google.maps.event.addListener(marker, 'click', () => {
-        this.get('infoWindow').setContent(place.name);
-        this.get('infoWindow').open(this.get('map'), marker);
+        this.infoWindow.setContent(place.name);
+        this.infoWindow.open(this.map, marker);
       });
     }
 
@@ -70,7 +70,7 @@ class GeoGoogleService {
          }
        }
 
-       let markerCluster = new MarkerClusterer(this.get('map'), markers);
+      //  let markerCluster = new MarkerClusterer(this.get('map'), markers);
        resolve(places);
       });
     });
@@ -85,14 +85,14 @@ class GeoGoogleService {
       zoom: 14
     });
 
-    this.set('infoWindow', infoWindow);
-    this.set('map', map);
+    this.infoWindow = infoWindow;
+    this.map = map;
 
     if (pinCenter) {
       new google.maps.Marker({
         map: map,
-        position: center,
-        icon: '/icons/ninja.svg'
+        position: center
+        // icon: '/icons/ninja.svg'
       });
     }
   }

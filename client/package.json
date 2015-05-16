@@ -7,6 +7,9 @@
     "navigation",
     "skeleton"
   ],
+  "scripts": {
+    "start": "gulp watch"
+  },
   "homepage": "http://aurelia.io",
   "bugs": {
     "url": "https://github.com/aurelia/skeleton-navigation/issues"

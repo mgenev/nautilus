@@ -10,7 +10,18 @@ export class GeoDemo {
     this.geo = geo;
   }
 
-  async activate() {
-    this.address = await this.geo.getCurrentAddress();
+  activate() {
+    this.setGeo();
+  }
+
+  async setGeo() {
+    try {
+      let geoData = await this.geo.getGeoposition();
+      this.address = await this.geo.getAddressForLatLong(geoData);
+      this.geo.drawMap(geoData, 'mapfeed');
+      this.nearbyPlaces = await this.geo.getNearbyPlaces(geoData, true);
+    } catch (err) {
+      console.log('ERR: ' , err);
+    }
   }
 }

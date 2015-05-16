@@ -2,6 +2,12 @@ body {
   margin: 0;
 }
 
+#mapfeed {
+  width: 300px;
+  height: 300px;
+}
+
+
 .splash {
     text-align: center;
     margin: 10% 0 0 0;
