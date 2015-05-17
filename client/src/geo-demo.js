@@ -23,6 +23,7 @@ export class GeoDemo {
   }
 
   async searchPlaces() {
-    this.nearbyPlaces = await this.geo.getNearbyPlaces(this.geoData, this.query, true);
+    this.places = await this.geo.getNearbyPlaces(this.geoData, 500, this.query, true);
+    console.log(this.places);
   }
 }

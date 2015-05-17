@@ -37,11 +37,11 @@ class GeoGoogleService {
     return geo.content.results[0].formatted_address;
   }
 
-  getNearbyPlaces(geo, query, pinMarkers=false) {
+  getNearbyPlaces(geo, radius=1000, query, pinMarkers=false) {
 
     let request = {
       location: this.getGoogleMapsGeoCoords(geo),
-      radius: '500',
+      radius: radius,
       query: query
     };
 
@@ -50,7 +50,8 @@ class GeoGoogleService {
     let createMarker = place => {
       let marker = new google.maps.Marker({
         map: this.map,
-        position: place.geometry.location
+        position: place.geometry.location,
+        // icon: place.icon
       });
 
       markers.push(marker);
