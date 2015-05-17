@@ -24,6 +24,5 @@ export class GeoDemo {
 
   async searchPlaces() {
     this.places = await this.geo.getNearbyPlaces(this.geoData, 500, this.query, true);
-    console.log(this.places);
   }
 }
