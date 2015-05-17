@@ -37,12 +37,12 @@ class GeoGoogleService {
     return geo.content.results[0].formatted_address;
   }
 
-  getNearbyPlaces(geo, pinMarkers=false) {
+  getNearbyPlaces(geo, query, pinMarkers=false) {
 
     let request = {
       location: this.getGoogleMapsGeoCoords(geo),
       radius: '500',
-      query: 'restaurant'
+      query: query
     };
 
     var service = new google.maps.places.PlacesService(this.map);

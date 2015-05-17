@@ -1,12 +1,10 @@
 import {inject} from 'aurelia-framework';
-import {HttpClient} from 'aurelia-http-client';
 import {GeoGoogleService} from './services/geo-google';
 
-@inject(HttpClient, GeoGoogleService)
+@inject(GeoGoogleService)
 export class GeoDemo {
   heading = 'Geo Demo';
-  constructor(http, geo) {
-    this.http = http;
+  constructor(geo) {
     this.geo = geo;
   }
 
@@ -16,12 +14,15 @@ export class GeoDemo {
 
   async setGeo() {
     try {
-      let geoData = await this.geo.getGeoposition();
-      this.address = await this.geo.getAddressForLatLong(geoData);
-      this.geo.drawMap(geoData, 'mapfeed');
-      this.nearbyPlaces = await this.geo.getNearbyPlaces(geoData, true);
+      this.geoData = await this.geo.getGeoposition();
+      this.address = await this.geo.getAddressForLatLong(this.geoData);
+      this.geo.drawMap(this.geoData, 'mapfeed');
     } catch (err) {
       console.log('ERR: ' , err);
     }
+  }
+
+  async searchPlaces() {
+    this.nearbyPlaces = await this.geo.getNearbyPlaces(this.geoData, this.query, true);
   }
 }

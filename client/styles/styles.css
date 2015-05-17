@@ -2,6 +2,10 @@ body {
   margin: 0;
 }
 
+.bump {
+    margin-top: 20px;
+}
+
 #mapfeed {
   width: 300px;
   height: 300px;

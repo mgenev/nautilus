@@ -1,7 +1,14 @@
 <template>
   <section class="au-animate">
-      <h2>${heading}</h2>
-      <h4>${address}</h4>
-      <div id="mapfeed"></div>
+    <h2>${heading}</h2>
+    <h4>${address}</h4>
+    <form>
+      <div class="form-group">
+        <label for="query">Search</label>
+        <input type="text" value.bind=query class='form-control'>
+      </div>
+      <button class="btn btn-default" click.delegate="searchPlaces()">Search Places</button>
+    </form>
+    <div id="mapfeed" class="bump"></div>
   </section>
 </template>
