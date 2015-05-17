@@ -5,6 +5,7 @@ This is a fork of [how-to-sane](https://github.com/mgenev/how-to-sane) which kee
 
 
 Currently demonstrated features:
+ - Geo service for Google Maps
 
 Open to contributors
 ==========================
