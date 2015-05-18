@@ -6,7 +6,6 @@ export class App {
     config.title = 'Aurelia';
     config.map([
       { route: ['','welcome'],  moduleId: './welcome',      nav: true, title:'Welcome' },
-      { route: 'flickr',        moduleId: './flickr',       nav: true },
       { route: 'geo-demo',      moduleId: './geo-demo',      nav: true, title: 'Geo Demo' }
     ]);
 
