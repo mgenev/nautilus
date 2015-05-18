@@ -24,18 +24,13 @@ How is it made?
 ### Additional Tools Available
 + Bootstrap - front end framework
 + SASS - CSS pre-processor
-+ Passport - User Authentication
 + GraphicMagic - Image manipulation
 
 Installation:
 ==========================
-1. Follow the steps to install and run the SANE stack - https://github.com/artificialio/sane
-2. Install and run MongoDB - http://docs.mongodb.org/manual/installation/
-3. Install imagemagic and graphicmagic like shown: https://github.com/aheckmann/gm
-4. Clone repo
-5. bower install on client and npm install  on both the client and the server directories
-6. 'sane up' to start both the client and the server
-7. Browse app at localhost:4200
+1. Go to the client folder and follow the steps to install Aurelia http://aurelia.io/get-started.html
+2. Install sails globally `npm install sails -g`
+3. NPM install in both client and server folders
 
 Support:
 ==========================
