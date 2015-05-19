@@ -20,7 +20,7 @@
         <h5>${place.name}</h5>
         <h6>${place.formatted_address}</h6>
         <span repeat.for="type of place.types">
-          ${type},
+          ${type}<span show.bind="!$last">, </span>
         </span>
       </div>
     </div>

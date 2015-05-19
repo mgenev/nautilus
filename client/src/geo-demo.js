@@ -20,9 +20,9 @@ export class GeoDemo {
       let opts = {
         geo: this.geoData,
         mapElementSelector: 'mapfeed',
-        pinCenter: true
+        pinCenter: true,
+        type: 'ROADMAP'
       };
-
       this.geo.drawMap(opts);
     } catch (err) {
       console.log('ERR: ' , err);
@@ -36,7 +36,7 @@ export class GeoDemo {
       query: this.query,
       pinMarkers: true
     };
-    
+
     this.places = await this.geo.getNearbyPlaces(opts);
   }
 }

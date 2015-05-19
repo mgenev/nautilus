@@ -1,16 +1,26 @@
-import {inject} from 'aurelia-framework';
-import {HttpClient} from 'aurelia-http-client';
-import {point} from '../utils/to-geo-json';
+import {
+  inject
+}
+from 'aurelia-framework';
+import {
+  HttpClient
+}
+from 'aurelia-http-client';
+import {
+  point
+}
+from '../utils/to-geo-json';
 
-@inject(HttpClient)
+@
+inject(HttpClient)
 class GeoGoogleService {
 
-  constructor(http){
+  constructor(http) {
     this.http = http;
   }
 
   async getGeoposition() {
-    return new Promise( (resolve, reject) => {
+    return new Promise((resolve, reject) => {
       let success = pos => resolve(pos.coords);
       let error = err => console.warn(`ERROR(${err.code}): ${err.message}`);
       navigator.geolocation.getCurrentPosition(success, error);
@@ -47,11 +57,16 @@ class GeoGoogleService {
 
     var service = new google.maps.places.PlacesService(this.map);
     let markers = [];
+
     let createMarker = place => {
+      let icon = {
+        url: place.icon,
+        scaledSize: new google.maps.Size(20, 20)
+      };
       let marker = new google.maps.Marker({
         map: this.map,
         position: place.geometry.location,
-        icon: 'images/icons/Alien.svg'
+        icon: icon
       });
 
       markers.push(marker);
@@ -62,17 +77,16 @@ class GeoGoogleService {
       });
     }
 
-
-    return new Promise( (resolve) => {
+    return new Promise((resolve) => {
       service.textSearch(request, (places, status) => {
-       if (status === google.maps.places.PlacesServiceStatus.OK && options.pinMarkers) {
-         for (var i = 0; i < places.length; i++) {
-           createMarker(places[i]);
-         }
-       }
+        if (status === google.maps.places.PlacesServiceStatus.OK && options.pinMarkers) {
+          for (var i = 0; i < places.length; i++) {
+            createMarker(places[i]);
+          }
+        }
 
-      //  let markerCluster = new MarkerClusterer(this.get('map'), markers);
-       resolve(places);
+        let markerCluster = new MarkerClusterer(this.map, markers);
+        resolve(places);
       });
     });
   }
@@ -82,18 +96,22 @@ class GeoGoogleService {
     let infoWindow = new google.maps.InfoWindow();
     let map = new google.maps.Map(document.getElementById(options.mapElementSelector), {
       center: center,
-      zoom: 14,
-      mapTypeId: google.maps.MapTypeId.TERRAIN
+      zoom: 15,
+      mapTypeId: google.maps.MapTypeId[options.type]
     });
 
     this.infoWindow = infoWindow;
     this.map = map;
+    let icon = {
+      url: 'images/icons/ninja.svg',
+      scaledSize: new google.maps.Size(65, 65)
+    };
 
     if (options.pinCenter) {
       new google.maps.Marker({
         map: map,
         position: center,
-        icon: 'images/icons/ninja.svg'
+        icon: icon
       });
     }
   }
