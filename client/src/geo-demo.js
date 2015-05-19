@@ -16,13 +16,27 @@ export class GeoDemo {
     try {
       this.geoData = await this.geo.getGeoposition();
       this.address = await this.geo.getAddressForLatLong(this.geoData);
-      this.geo.drawMap(this.geoData, 'mapfeed');
+
+      let opts = {
+        geo: this.geoData,
+        mapElementSelector: 'mapfeed',
+        pinCenter: true
+      };
+
+      this.geo.drawMap(opts);
     } catch (err) {
       console.log('ERR: ' , err);
     }
   }
 
   async searchPlaces() {
-    this.places = await this.geo.getNearbyPlaces(this.geoData, 500, this.query, true);
+    let opts = {
+      geo: this.geoData,
+      radius: 500,
+      query: this.query,
+      pinMarkers: true
+    };
+    
+    this.places = await this.geo.getNearbyPlaces(opts);
   }
 }

@@ -37,12 +37,12 @@ class GeoGoogleService {
     return geo.content.results[0].formatted_address;
   }
 
-  getNearbyPlaces(geo, radius=1000, query, pinMarkers=false) {
+  getNearbyPlaces(options) {
 
     let request = {
-      location: this.getGoogleMapsGeoCoords(geo),
-      radius: radius,
-      query: query
+      location: this.getGoogleMapsGeoCoords(options.geo),
+      radius: options.radius,
+      query: options.query
     };
 
     var service = new google.maps.places.PlacesService(this.map);
@@ -51,7 +51,7 @@ class GeoGoogleService {
       let marker = new google.maps.Marker({
         map: this.map,
         position: place.geometry.location,
-        // icon: place.icon
+        icon: 'images/icons/Alien.svg'
       });
 
       markers.push(marker);
@@ -65,7 +65,7 @@ class GeoGoogleService {
 
     return new Promise( (resolve) => {
       service.textSearch(request, (places, status) => {
-       if (status === google.maps.places.PlacesServiceStatus.OK && pinMarkers) {
+       if (status === google.maps.places.PlacesServiceStatus.OK && options.pinMarkers) {
          for (var i = 0; i < places.length; i++) {
            createMarker(places[i]);
          }
@@ -77,23 +77,23 @@ class GeoGoogleService {
     });
   }
 
-  drawMap(geo, mapElementSelector, pinCenter=true) {
-
-    let center = this.getGoogleMapsGeoCoords(geo);
+  drawMap(options) {
+    let center = this.getGoogleMapsGeoCoords(options.geo);
     let infoWindow = new google.maps.InfoWindow();
-    let map = new google.maps.Map(document.getElementById(mapElementSelector), {
+    let map = new google.maps.Map(document.getElementById(options.mapElementSelector), {
       center: center,
-      zoom: 14
+      zoom: 14,
+      mapTypeId: google.maps.MapTypeId.TERRAIN
     });
 
     this.infoWindow = infoWindow;
     this.map = map;
 
-    if (pinCenter) {
+    if (options.pinCenter) {
       new google.maps.Marker({
         map: map,
-        position: center
-        // icon: '/icons/ninja.svg'
+        position: center,
+        icon: 'images/icons/ninja.svg'
       });
     }
   }
