@@ -36,7 +36,8 @@ export class GeoDemo {
       query: this.query,
       pinMarkers: true
     };
-
+    this.geo.clearMarkers();
+    this.places = [];
     this.places = await this.geo.getNearbyPlaces(opts);
   }
 }

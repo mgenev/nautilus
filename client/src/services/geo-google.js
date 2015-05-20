@@ -1,23 +1,15 @@
-import {
-  inject
-}
-from 'aurelia-framework';
-import {
-  HttpClient
-}
-from 'aurelia-http-client';
-import {
-  point
-}
-from '../utils/to-geo-json';
+import {inject} from 'aurelia-framework';
+import {HttpClient} from 'aurelia-http-client';
+import {point} from '../utils/to-geo-json';
 
-@
-inject(HttpClient)
+@inject(HttpClient)
 class GeoGoogleService {
 
   constructor(http) {
     this.http = http;
   }
+
+  markers = [];
 
   async getGeoposition() {
     return new Promise((resolve, reject) => {
@@ -47,6 +39,12 @@ class GeoGoogleService {
     return geo.content.results[0].formatted_address;
   }
 
+  clearMarkers() {
+    for (var i = 0; i < this.markers.length; i++) {
+      this.markers[i].setMap(null);
+    }
+  }
+
   getNearbyPlaces(options) {
 
     let request = {
@@ -56,7 +54,6 @@ class GeoGoogleService {
     };
 
     var service = new google.maps.places.PlacesService(this.map);
-    let markers = [];
 
     let createMarker = place => {
       let icon = {
@@ -69,7 +66,7 @@ class GeoGoogleService {
         icon: icon
       });
 
-      markers.push(marker);
+      this.markers.push(marker);
 
       google.maps.event.addListener(marker, 'click', () => {
         this.infoWindow.setContent(place.name);
@@ -85,7 +82,7 @@ class GeoGoogleService {
           }
         }
 
-        let markerCluster = new MarkerClusterer(this.map, markers);
+        // let markerCluster = new MarkerClusterer(this.map, this.markers);
         resolve(places);
       });
     });
