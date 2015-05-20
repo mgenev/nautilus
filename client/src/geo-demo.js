@@ -1,11 +1,13 @@
 import {inject} from 'aurelia-framework';
 import {GeoGoogleService} from './services/geo-google';
+import {EventAggregator} from 'aurelia-event-aggregator';
 
-@inject(GeoGoogleService)
+@inject(GeoGoogleService, EventAggregator)
 export class GeoDemo {
   heading = 'Geo Demo';
-  constructor(geo) {
+  constructor(geo, eventAggregator) {
     this.geo = geo;
+    this.eventAggregator = eventAggregator;
   }
 
   activate() {
@@ -40,5 +42,9 @@ export class GeoDemo {
     };
 
     this.places = await this.geo.getNearbyPlaces(opts);
+  }
+
+  showMarkerInfoWindow(i) {
+    this.eventAggregator.publish('markerClick', window.markers[i]);
   }
 }

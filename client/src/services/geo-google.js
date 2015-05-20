@@ -1,15 +1,23 @@
 import {inject} from 'aurelia-framework';
 import {HttpClient} from 'aurelia-http-client';
 import {point} from '../utils/to-geo-json';
+import {EventAggregator} from 'aurelia-event-aggregator';
 
-@inject(HttpClient)
+@inject(HttpClient, EventAggregator)
 class GeoGoogleService {
 
-  constructor(http) {
+  constructor(http, eventAggregator) {
     this.http = http;
+    this.eventAggregator = eventAggregator;
+    this.subscribe();
   }
 
-  markers = [];
+
+  subscribe() {
+    this.eventAggregator.subscribe('markerClick', function(marker) {
+      google.maps.event.trigger(marker, 'click');
+    });
+  }
 
   async getGeoposition() {
     return new Promise((resolve, reject) => {
@@ -40,8 +48,8 @@ class GeoGoogleService {
   }
 
   clearMarkers() {
-    for (var i = 0; i < this.markers.length; i++) {
-      this.markers[i].setMap(null);
+    for (var i = 0; i < window.markers.length; i++) {
+      window.markers[i].setMap(null);
     }
   }
 
@@ -53,7 +61,7 @@ class GeoGoogleService {
       query: options.query
     };
 
-    var service = new google.maps.places.PlacesService(this.map);
+    var service = new google.maps.places.PlacesService(window.map);
 
     let createMarker = (place, index) => {
       let icon = {
@@ -61,19 +69,19 @@ class GeoGoogleService {
         scaledSize: new google.maps.Size(20, 20)
       };
       let marker = new google.maps.Marker({
-        map: this.map,
+        map: window.map,
         position: place.geometry.location,
         icon: icon
       });
 
-      this.markers.push(marker);
+      window.markers.push(marker);
 
       google.maps.event.addListener(marker, 'click', () => {
         // TODO try using aurelia's pub sub here instead of jquery
         $('.place-active').removeClass('place-active');
         $('.place-'+index).addClass('place-active');
-        this.infoWindow.setContent(place.name);
-        this.infoWindow.open(this.map, marker);
+        window.infoWindow.setContent(place.name);
+        window.infoWindow.open(window.map, marker);
       });
     }
 
@@ -85,7 +93,7 @@ class GeoGoogleService {
           }
         }
 
-        // let markerCluster = new MarkerClusterer(this.map, this.markers);
+        // let markerCluster = new MarkerClusterer(this.map, window.markers);
         resolve(places);
       });
     });
@@ -93,15 +101,13 @@ class GeoGoogleService {
 
   drawMap(options) {
     let center = this.getGoogleMapsGeoCoords(options.geo);
-    let infoWindow = new google.maps.InfoWindow();
-    let map = new google.maps.Map(document.getElementById(options.mapElementSelector), {
+    window.infoWindow = new google.maps.InfoWindow();
+    window.map = new google.maps.Map(document.getElementById(options.mapElementSelector), {
       center: center,
       zoom: 15,
       mapTypeId: google.maps.MapTypeId[options.type]
     });
 
-    this.infoWindow = infoWindow;
-    this.map = map;
     let icon = {
       url: 'images/icons/ninja.svg',
       scaledSize: new google.maps.Size(65, 65)
@@ -109,7 +115,7 @@ class GeoGoogleService {
 
     if (options.pinCenter) {
       new google.maps.Marker({
-        map: map,
+        map: window.map,
         position: center,
         icon: icon
       });
