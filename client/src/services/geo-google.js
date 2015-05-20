@@ -55,7 +55,7 @@ class GeoGoogleService {
 
     var service = new google.maps.places.PlacesService(this.map);
 
-    let createMarker = place => {
+    let createMarker = (place, index) => {
       let icon = {
         url: place.icon,
         scaledSize: new google.maps.Size(20, 20)
@@ -69,6 +69,9 @@ class GeoGoogleService {
       this.markers.push(marker);
 
       google.maps.event.addListener(marker, 'click', () => {
+        // TODO try using aurelia's pub sub here instead of jquery
+        $('.place-active').removeClass('place-active');
+        $('.place-'+index).addClass('place-active');
         this.infoWindow.setContent(place.name);
         this.infoWindow.open(this.map, marker);
       });
@@ -78,7 +81,7 @@ class GeoGoogleService {
       service.textSearch(request, (places, status) => {
         if (status === google.maps.places.PlacesServiceStatus.OK && options.pinMarkers) {
           for (var i = 0; i < places.length; i++) {
-            createMarker(places[i]);
+            createMarker(places[i], i);
           }
         }
 

@@ -4,7 +4,7 @@
     <h4>${address}</h4>
     <div class="row">
       <div class="col-sm-12">
-        <form role="form" submit.delegate="searchPlaces($event)">
+        <form role="form" submit.delegate="searchPlaces()">
           <div class="input-group">
             <span class="input-group-btn">
               <button class="btn btn-default" type="submit">Go!</button>
@@ -19,11 +19,13 @@
     </div>
     <div class="row">
       <div class="col-sm-6 col-md-3" repeat.for="place of places">
-        <h5>${place.name}</h5>
-        <h6>${place.formatted_address}</h6>
-        <span repeat.for="type of place.types">
-          ${type}<span show.bind="!$last">, </span>
-        </span>
+        <div class="place-${$index}">
+          <h5>${place.name}</h5>
+          <h6>${place.formatted_address}</h6>
+          <span repeat.for="type of place.types">
+            ${type}<span show.bind="!$last">, </span>
+          </span>
+      </div>
       </div>
     </div>
   </section>

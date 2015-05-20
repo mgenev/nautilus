@@ -30,14 +30,15 @@ export class GeoDemo {
   }
 
   async searchPlaces() {
+    this.geo.clearMarkers();
+    this.places = [];
     let opts = {
       geo: this.geoData,
       radius: 500,
       query: this.query,
       pinMarkers: true
     };
-    this.geo.clearMarkers();
-    this.places = [];
+
     this.places = await this.geo.getNearbyPlaces(opts);
   }
 }
