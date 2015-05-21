@@ -2,7 +2,7 @@
   <section class="au-animate">
     <h2>${heading}</h2>
     <h4>${address}</h4>
-    <div class="row">
+    <div class="row" ref="row">
       <div class="col-sm-12">
         <form role="form" submit.delegate="searchPlaces()">
           <div class="input-group">
@@ -19,7 +19,7 @@
     </div>
     <div class="row">
       <div class="col-sm-6 col-md-3" repeat.for="place of places">
-        <div class="place-${$index}" click.trigger="$parent.showMarkerInfoWindow($index)">
+        <div class="${place.class}" click.trigger="$parent.showMarkerInfoWindow($index)">
           <h5>${place.name}</h5>
           <h6>${place.formatted_address}</h6>
           <span repeat.for="type of place.types">

@@ -8,11 +8,11 @@ export class GeoDemo {
   constructor(geo, eventAggregator) {
     this.geo = geo;
     this.eventAggregator = eventAggregator;
-    this.eventAggregator.subscribe('googleMaps:markerClick', this.highlightPlace);
   }
 
   activate() {
     this.setGeo();
+    this.eventAggregator.subscribe('googleMaps:markerClick', index => this.highlightPlace(index));
   }
 
   async setGeo() {
@@ -51,6 +51,6 @@ export class GeoDemo {
 
   highlightPlace(index) {
     $('.place-active').removeClass('place-active');
-    $('.place-'+index).addClass('place-active');
+    this.places[index].class="place-active";
   }
 }
