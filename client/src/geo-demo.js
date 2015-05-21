@@ -8,6 +8,7 @@ export class GeoDemo {
   constructor(geo, eventAggregator) {
     this.geo = geo;
     this.eventAggregator = eventAggregator;
+    this.eventAggregator.subscribe('googleMaps:markerClick', this.highlightPlace);
   }
 
   activate() {
@@ -45,6 +46,11 @@ export class GeoDemo {
   }
 
   showMarkerInfoWindow(i) {
-    this.eventAggregator.publish('markerClick', window.markers[i]);
+    this.geo.placeListingClick(window.markers[i]);
+  }
+
+  highlightPlace(index) {
+    $('.place-active').removeClass('place-active');
+    $('.place-'+index).addClass('place-active');
   }
 }

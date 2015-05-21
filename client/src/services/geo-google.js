@@ -9,14 +9,10 @@ class GeoGoogleService {
   constructor(http, eventAggregator) {
     this.http = http;
     this.eventAggregator = eventAggregator;
-    this.subscribe();
   }
 
-
-  subscribe() {
-    this.eventAggregator.subscribe('markerClick', function(marker) {
-      google.maps.event.trigger(marker, 'click');
-    });
+  placeListingClick(marker) {
+    google.maps.event.trigger(marker, 'click');
   }
 
   async getGeoposition() {
@@ -77,9 +73,8 @@ class GeoGoogleService {
       window.markers.push(marker);
 
       google.maps.event.addListener(marker, 'click', () => {
-        // TODO try using aurelia's pub sub here instead of jquery
-        $('.place-active').removeClass('place-active');
-        $('.place-'+index).addClass('place-active');
+        this.eventAggregator.publish('googleMaps:markerClick', index);
+
         window.infoWindow.setContent(place.name);
         window.infoWindow.open(window.map, marker);
       });
