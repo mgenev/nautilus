@@ -1,6 +1,0 @@
-{
-  "disableAnalytics": false,
-  "database": "mongo",
-  "docker": false,
-  "verbose": false
-}
