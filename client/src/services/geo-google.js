@@ -17,7 +17,11 @@ class GeoGoogleService {
 
   async getGeoposition() {
     return new Promise((resolve, reject) => {
-      let success = pos => resolve(pos.coords);
+      let success = pos => {
+        // TODO enable real geo eventually
+        // resolve(pos.coords)
+        resolve({latitude: 47.6268381,longitude: -122.3618504});
+      };
       let error = err => console.warn(`ERROR(${err.code}): ${err.message}`);
       navigator.geolocation.getCurrentPosition(success, error);
     });
@@ -88,7 +92,7 @@ class GeoGoogleService {
           }
         }
 
-        // let markerCluster = new MarkerClusterer(this.map, window.markers);
+        let markerCluster = new MarkerClusterer(window.map, window.markers);
         resolve(places);
       });
     });
