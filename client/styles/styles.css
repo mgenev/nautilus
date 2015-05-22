@@ -11,6 +11,9 @@ body {
   height: 300px;
 }
 
+.place-active {
+  background-color: lavender;
+}
 
 .splash {
     text-align: center;

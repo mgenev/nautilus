@@ -1,28 +1,59 @@
 import {inject} from 'aurelia-framework';
 import {GeoGoogleService} from './services/geo-google';
+import {EventAggregator} from 'aurelia-event-aggregator';
 
-@inject(GeoGoogleService)
+@inject(GeoGoogleService, EventAggregator)
 export class GeoDemo {
   heading = 'Geo Demo';
-  constructor(geo) {
+  constructor(geo, eventAggregator) {
     this.geo = geo;
+    this.eventAggregator = eventAggregator;
   }
 
   activate() {
     this.setGeo();
+    this.eventAggregator.subscribe('googleMaps:markerClick', index => this.highlightPlace(index));
   }
 
   async setGeo() {
     try {
       this.geoData = await this.geo.getGeoposition();
       this.address = await this.geo.getAddressForLatLong(this.geoData);
-      this.geo.drawMap(this.geoData, 'mapfeed');
+
+      let opts = {
+        geo: this.geoData,
+        mapElementSelector: 'mapfeed',
+        pinCenter: true,
+        type: 'ROADMAP'
+      };
+      this.geo.drawMap(opts);
     } catch (err) {
       console.log('ERR: ' , err);
     }
   }
 
   async searchPlaces() {
-    this.places = await this.geo.getNearbyPlaces(this.geoData, 500, this.query, true);
+    this.geo.clearMarkers();
+    this.places = [];
+    let opts = {
+      geo: this.geoData,
+      radius: 500,
+      query: this.query,
+      pinMarkers: true
+    };
+
+    this.places = await this.geo.getNearbyPlaces(opts);
+  }
+
+  showMarkerInfoWindow(i) {
+    this.geo.placeListingClick(window.markers[i]);
+  }
+
+  highlightPlace(index) {
+    if (this.activeClass !== undefined) {
+      this.places[this.activeClass].class='';
+    }
+    this.activeClass=index;
+    this.places[index].class='place-active';
   }
 }

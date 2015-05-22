@@ -1,16 +1,22 @@
 import {inject} from 'aurelia-framework';
 import {HttpClient} from 'aurelia-http-client';
 import {point} from '../utils/to-geo-json';
+import {EventAggregator} from 'aurelia-event-aggregator';
 
-@inject(HttpClient)
+@inject(HttpClient, EventAggregator)
 class GeoGoogleService {
 
-  constructor(http){
+  constructor(http, eventAggregator) {
     this.http = http;
+    this.eventAggregator = eventAggregator;
+  }
+
+  placeListingClick(marker) {
+    google.maps.event.trigger(marker, 'click');
   }
 
   async getGeoposition() {
-    return new Promise( (resolve, reject) => {
+    return new Promise((resolve, reject) => {
       let success = pos => resolve(pos.coords);
       let error = err => console.warn(`ERROR(${err.code}): ${err.message}`);
       navigator.geolocation.getCurrentPosition(success, error);
@@ -37,63 +43,76 @@ class GeoGoogleService {
     return geo.content.results[0].formatted_address;
   }
 
-  getNearbyPlaces(geo, radius=1000, query, pinMarkers=false) {
+  clearMarkers() {
+    for (var i = 0; i < window.markers.length; i++) {
+      window.markers[i].setMap(null);
+    }
+  }
+
+  getNearbyPlaces(options) {
 
     let request = {
-      location: this.getGoogleMapsGeoCoords(geo),
-      radius: radius,
-      query: query
+      location: this.getGoogleMapsGeoCoords(options.geo),
+      radius: options.radius,
+      query: options.query
     };
 
-    var service = new google.maps.places.PlacesService(this.map);
-    let markers = [];
-    let createMarker = place => {
+    var service = new google.maps.places.PlacesService(window.map);
+
+    let createMarker = (place, index) => {
+      let icon = {
+        url: place.icon,
+        scaledSize: new google.maps.Size(20, 20)
+      };
       let marker = new google.maps.Marker({
-        map: this.map,
+        map: window.map,
         position: place.geometry.location,
-        // icon: place.icon
+        icon: icon
       });
 
-      markers.push(marker);
+      window.markers.push(marker);
 
       google.maps.event.addListener(marker, 'click', () => {
-        this.infoWindow.setContent(place.name);
-        this.infoWindow.open(this.map, marker);
+        this.eventAggregator.publish('googleMaps:markerClick', index);
+
+        window.infoWindow.setContent(place.name);
+        window.infoWindow.open(window.map, marker);
       });
     }
 
-
-    return new Promise( (resolve) => {
+    return new Promise((resolve) => {
       service.textSearch(request, (places, status) => {
-       if (status === google.maps.places.PlacesServiceStatus.OK && pinMarkers) {
-         for (var i = 0; i < places.length; i++) {
-           createMarker(places[i]);
-         }
-       }
+        if (status === google.maps.places.PlacesServiceStatus.OK && options.pinMarkers) {
+          for (var i = 0; i < places.length; i++) {
+            createMarker(places[i], i);
+          }
+        }
 
-      //  let markerCluster = new MarkerClusterer(this.get('map'), markers);
-       resolve(places);
+        // let markerCluster = new MarkerClusterer(this.map, window.markers);
+        resolve(places);
       });
     });
   }
 
-  drawMap(geo, mapElementSelector, pinCenter=true) {
-
-    let center = this.getGoogleMapsGeoCoords(geo);
-    let infoWindow = new google.maps.InfoWindow();
-    let map = new google.maps.Map(document.getElementById(mapElementSelector), {
+  drawMap(options) {
+    let center = this.getGoogleMapsGeoCoords(options.geo);
+    window.infoWindow = new google.maps.InfoWindow();
+    window.map = new google.maps.Map(document.getElementById(options.mapElementSelector), {
       center: center,
-      zoom: 14
+      zoom: 15,
+      mapTypeId: google.maps.MapTypeId[options.type]
     });
 
-    this.infoWindow = infoWindow;
-    this.map = map;
+    let icon = {
+      url: 'images/icons/ninja.svg',
+      scaledSize: new google.maps.Size(65, 65)
+    };
 
-    if (pinCenter) {
+    if (options.pinCenter) {
       new google.maps.Marker({
-        map: map,
-        position: center
-        // icon: '/icons/ninja.svg'
+        map: window.map,
+        position: center,
+        icon: icon
       });
     }
   }
