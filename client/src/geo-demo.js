@@ -50,7 +50,10 @@ export class GeoDemo {
   }
 
   highlightPlace(index) {
-    $('.place-active').removeClass('place-active');
-    this.places[index].class="place-active";
+    if (this.activeClass !== undefined) {
+      this.places[this.activeClass].class='';
+    }
+    this.activeClass=index;
+    this.places[index].class='place-active';
   }
 }
