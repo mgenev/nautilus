@@ -1,46 +1,24 @@
-// core
-var http = require('http');
-var path = require('path');
-var express = require('express');
+koa = require('koa');
+router = require('koa-router');
+generateApi = require('koa-mongo-rest');
 
-// express mods for auto binding of routes
-var restify = require('express-restify-mongoose');
-var expressControllers = require('express-controller');
-// logger
-var morgan = require('morgan');
-// middleware
-var bodyParser = require('body-parser'),
-	  methodOverride = require('method-override');
+mongoUrl = '127.0.0.1:27017';
+mongoose = require('mongoose');
+mongoose.connect(mongoUrl);
 
-// db related
-var mongoose = require('mongoose');
-
-mongoose.connect('mongodb://localhost/nautilus');
-var db = mongoose.connection;
-
-var ToDoSchema = new mongoose.Schema({
-	text: { type: String, required: true },
-	done: { type: Boolean, default: false }
-});
-var ToDoModel = mongoose.model('todo', ToDoSchema);
-
-var app = express();
-app.set('port', process.env.PORT || 3000);
-app.use(morgan('dev'));
-app.use(bodyParser.urlencoded({ extended: true }));
-app.use(bodyParser.json());
-app.use(methodOverride('X-HTTP-Method-Override'));
-expressControllers.setDirectory( __dirname + '/controllers').bind(app, function () {
-  restify.serve(app, ToDoModel, {
-    //exclude: 'text,done'
-  });
+schema = new mongoose.Schema({
+  email: String,
+  name: String,
+  password: String,
+  address: String,
+  zipcode: Number,
+  lists: Array
 });
 
-// app.use(express.static(path.join(__dirname, 'public')));
-// app.use(function (req, res) {
-	// res.sendFile(path.join(__dirname, 'public/index.html'));
-// });
+app = koa();
+app.use(router(app));
 
-http.createServer(app).listen(app.get('port'), function () {
-	console.log('Express server listening on port ' + app.get('port'));
-});
+model = mongoose.model('user', schema);
+generateApi(app, model, '/api');
+
+app.listen(process.env.PORT || 3000);
