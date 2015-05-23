@@ -1,11 +1,20 @@
+// core
 var http = require('http');
-var express = require('express');
-var morgan = require('morgan');
 var path = require('path');
+var express = require('express');
+
+// express mods for auto binding of routes
 var restify = require('express-restify-mongoose');
+var expressControllers = require('express-controller');
+// logger
+var morgan = require('morgan');
+// middleware
 var bodyParser = require('body-parser'),
 	  methodOverride = require('method-override');
+
+// db related
 var mongoose = require('mongoose');
+
 mongoose.connect('mongodb://localhost/nautilus');
 var db = mongoose.connection;
 
@@ -21,9 +30,12 @@ app.use(morgan('dev'));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(methodOverride('X-HTTP-Method-Override'));
-restify.serve(app, ToDoModel, {
-	//exclude: 'text,done'
+expressControllers.setDirectory( __dirname + '/controllers').bind(app, function () {
+  restify.serve(app, ToDoModel, {
+    //exclude: 'text,done'
+  });
 });
+
 // app.use(express.static(path.join(__dirname, 'public')));
 // app.use(function (req, res) {
 	// res.sendFile(path.join(__dirname, 'public/index.html'));
