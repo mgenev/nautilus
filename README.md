@@ -15,22 +15,23 @@ How is it made?
 ==========================
 
 ### Core components
-
-+ Node - Server Side
-+ Sails - Web Server Framework
 + Aurelia - Client Side Framework
++ Node - Server Side
++ Express - Web Server Framework
++ Mongoose - Node-Mongo ORM
 + MongoDB - Database
 
 ### Additional Tools Available
 + Bootstrap - front end framework
-+ SASS - CSS pre-processor
 + GraphicMagic - Image manipulation
 
 Installation:
 ==========================
-1. Go to the client folder and follow the steps to install Aurelia http://aurelia.io/get-started.html
-2. Install sails globally `npm install sails -g`
-3. NPM install in both client and server folders
+1. Go to the client folder and follow the steps to install Aurelia's prerequisites Gulp and Jspm http://aurelia.io/get-started.html
+2. `npm install` in both /client and /server folders
+3. `jspm -y install` in /client
+4. run server with ./server node server
+5. run client with ./client/gulp watch
 
 Support:
 ==========================
