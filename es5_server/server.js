@@ -1,7 +1,5 @@
 'use strict';
 
-require('./regenerator.js');
-
 var config = require('./config/environment'),
     koaConfig = require('./config/koa'),
     co = require('co'),

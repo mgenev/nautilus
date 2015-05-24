@@ -12,7 +12,7 @@ var paths = {
 gulp.task('babel', function () {
   return gulp.src(paths.es6)
     .pipe(babel({
-      optional: ['es7.asyncFunctions']
+      optional: ['asyncToGenerator']
     }))
     .pipe(gulp.dest(paths.es5));
 });

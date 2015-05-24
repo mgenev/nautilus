@@ -27,13 +27,13 @@ module.exports = function (app) {
   // TODO enable jwt auth app.use(jwt({secret: config.app.secret}));
 
   // mount all the routes defined in the api controllers
-  fs.readdirSync(__dirname+'/../controllers').forEach(function (file) {
+  fs.readdirSync(__dirname+'/../controllers').forEach(file => {
     require(__dirname+'/../controllers/' + file).init(app);
   });
 
   // mount REST routes for all models
   let model, schema;
-  require('fs').readdirSync(__dirname+'/../models').forEach(function (name) {
+  require('fs').readdirSync(__dirname+'/../models').forEach(name => {
   	if (name[0] === '.') return;
   	name = name.substring(0, name.length - 3);
   	schema = require('../models/' + name);

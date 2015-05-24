@@ -1,5 +1,3 @@
-require('./regenerator.js');
-
 const config = require('./config/environment'),
     koaConfig = require('./config/koa'),
     co = require('co'),
@@ -12,7 +10,7 @@ module.exports = app;
 /**
  * Initializes koa server. Returns a promise.
  */
-app.init = function () {
+app.init = () => {
 	// connect to mongo
 	mongoose.connect('mongodb://localhost/nautilus');
   // set up koa
