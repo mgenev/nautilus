@@ -5,7 +5,7 @@ dbconfig.php
 sitemap.xml
 *.log
 .sass-cache
-
+.settings
 # Operating system files
 .Spotlight-V100
 .Trashes
