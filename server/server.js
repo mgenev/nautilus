@@ -10,7 +10,7 @@ module.exports = app;
 /**
  * Initializes koa server. Returns a promise.
  */
-app.init = co.wrap(function *(overwriteDB) {
+app.init = co.wrap(function *() {
 	// connect to mongo
 	mongoose.connect('mongodb://localhost/nautilus');
   // set up koa

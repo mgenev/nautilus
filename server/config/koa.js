@@ -51,10 +51,11 @@ module.exports = function (app) {
   // TODO enable jwt auth app.use(jwt({secret: config.app.secret}));
 
   // mount all the routes defined in the api controllers
-  // fs.readdirSync('./server/controllers').forEach(function (file) {
-  //   require('../controllers/' + file).init(app);
-  // });
+  fs.readdirSync(__dirname+'/../controllers').forEach(function (file) {
+    require(__dirname+'/../controllers/' + file).init(app);
+  });
 
+  // mount REST routes for all models
   var model, schema;
   require('fs').readdirSync(__dirname+'/../models').forEach(function (name) {
   	if (name[0] === '.') return;
@@ -63,5 +64,4 @@ module.exports = function (app) {
   	model = mongoose.model(pluralize(name), schema);
   	generateApi(app, model, '/api');
   });
-
 };
