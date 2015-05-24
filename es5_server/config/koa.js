@@ -1,4 +1,6 @@
-const fs = require('fs'),
+'use strict';
+
+var fs = require('fs'),
     logger = require('koa-logger'),
     send = require('koa-send'),
     jwt = require('koa-jwt'),
@@ -7,9 +9,9 @@ const fs = require('fs'),
     router = require('koa-router'),
     config = require('./environment');
 
-const generateApi = require('koa-mongo-rest');
-const pluralize = require('pluralize');
-const mongoose = require('mongoose');
+var generateApi = require('koa-mongo-rest');
+var pluralize = require('pluralize');
+var mongoose = require('mongoose');
 
 module.exports = function (app) {
   // middleware configuration
@@ -27,17 +29,18 @@ module.exports = function (app) {
   // TODO enable jwt auth app.use(jwt({secret: config.app.secret}));
 
   // mount all the routes defined in the api controllers
-  fs.readdirSync(__dirname+'/../controllers').forEach(function (file) {
-    require(__dirname+'/../controllers/' + file).init(app);
+  fs.readdirSync(__dirname + '/../controllers').forEach(function (file) {
+    require(__dirname + '/../controllers/' + file).init(app);
   });
 
   // mount REST routes for all models
-  let model, schema;
-  require('fs').readdirSync(__dirname+'/../models').forEach(function (name) {
-  	if (name[0] === '.') return;
-  	name = name.substring(0, name.length - 3);
-  	schema = require('../models/' + name);
-  	model = mongoose.model(pluralize(name), schema);
-  	generateApi(app, model, '/api');
+  var model = undefined,
+      schema = undefined;
+  require('fs').readdirSync(__dirname + '/../models').forEach(function (name) {
+    if (name[0] === '.') return;
+    name = name.substring(0, name.length - 3);
+    schema = require('../models/' + name);
+    model = mongoose.model(pluralize(name), schema);
+    generateApi(app, model, '/api');
   });
 };

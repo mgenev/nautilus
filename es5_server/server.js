@@ -1,11 +1,13 @@
+'use strict';
+
 require('./regenerator.js');
 
-const config = require('./config/environment'),
+var config = require('./config/environment'),
     koaConfig = require('./config/koa'),
     co = require('co'),
     koa = require('koa'),
     app = koa(),
-		mongoose = require('mongoose');
+    mongoose = require('mongoose');
 
 module.exports = app;
 
@@ -13,8 +15,8 @@ module.exports = app;
  * Initializes koa server. Returns a promise.
  */
 app.init = function () {
-	// connect to mongo
-	mongoose.connect('mongodb://localhost/nautilus');
+  // connect to mongo
+  mongoose.connect('mongodb://localhost/nautilus');
   // set up koa
   koaConfig(app);
   // lift server
@@ -28,8 +30,7 @@ app.init = function () {
 if (!module.parent) {
   try {
     app.init();
-  }
-  catch (err) {
+  } catch (err) {
     console.error(err);
     process.exit(1);
   }
