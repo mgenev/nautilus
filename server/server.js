@@ -1,25 +1,31 @@
-require("babel-core").transform("code");
-const koa = require('koa');
-const router = require('koa-router');
-const logger = require('koa-logger');
-const generateApi = require('koa-mongo-rest');
-const pluralize = require('pluralize');
-const mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost/nautilus');
+const config = require('./config/environment'),
+    koaConfig = require('./config/koa'),
+    co = require('co'),
+    koa = require('koa'),
+    app = koa(),
+		mongoose = require('mongoose');
 
-const app = koa();
-app.use(router(app));
-app.use(logger(app));
+module.exports = app;
 
-// load all models and create rest endpoints
-var model, schema;
-require('fs').readdirSync(__dirname+'/models').forEach(function (name) {
-	if (name[0] === '.') return;
-	name = name.substring(0, name.length - 3);
-	console.log('NAME ', name);
-	schema = require('./models/' + name);
-	model = mongoose.model(pluralize(name), schema);
-	generateApi(app, model, '/api');
+/**
+ * Initializes koa server. Returns a promise.
+ */
+app.init = co.wrap(function *(overwriteDB) {
+	// connect to mongo
+	mongoose.connect('mongodb://localhost/nautilus');
+  // set up koa
+  koaConfig(app);
+  // lift server
+  app.server = app.listen(config.app.port);
+  if (config.app.env !== 'test') {
+    console.log('Koa server up on port ' + config.app.port);
+  }
 });
 
-app.listen(process.env.PORT || 3000);
+// auto init if this app is not being initialized by another module (i.e. using require('./app').init();)
+if (!module.parent) {
+  app.init().catch(function (err) {
+    console.error(err.stack);
+    process.exit(1);
+  });
+}
