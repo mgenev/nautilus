@@ -1,24 +1,20 @@
-koa = require('koa');
-router = require('koa-router');
-generateApi = require('koa-mongo-rest');
-
-mongoUrl = '127.0.0.1:27017';
-mongoose = require('mongoose');
+require("babel-core").transform("code");
+const koa = require('koa');
+const router = require('koa-router');
+const logger = require('koa-logger');
+const generateApi = require('koa-mongo-rest');
+const mongoUrl = '127.0.0.1:27017';
+const mongoose = require('mongoose');
 mongoose.connect(mongoUrl);
 
-schema = new mongoose.Schema({
-  email: String,
-  name: String,
-  password: String,
-  address: String,
-  zipcode: Number,
-  lists: Array
-});
-
-app = koa();
+const app = koa();
 app.use(router(app));
-
-model = mongoose.model('user', schema);
-generateApi(app, model, '/api');
+app.use(logger(app));
+var model;
+require('fs').readdirSync(__dirname+'/models').forEach(function (name) {
+	if (name[0] === '.') return;
+	model = require('./models/' + name);
+	generateApi(app, model, '/api');
+});
 
 app.listen(process.env.PORT || 3000);
