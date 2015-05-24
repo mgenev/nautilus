@@ -3,6 +3,7 @@
  */
 'use strict';
 
+var marked0$0 = [custom].map(regeneratorRuntime.mark);
 var route = require('koa-route');
 
 // register koa routes
@@ -11,7 +12,7 @@ exports.init = function (app) {
 };
 
 function custom() {
-  return regeneratorRuntime.async(function custom$(context$1$0) {
+  return regeneratorRuntime.wrap(function custom$(context$1$0) {
     while (1) switch (context$1$0.prev = context$1$0.next) {
       case 0:
         this.body = 'custom post return';
@@ -20,5 +21,5 @@ function custom() {
       case 'end':
         return context$1$0.stop();
     }
-  }, null, this);
+  }, marked0$0[0], this);
 }

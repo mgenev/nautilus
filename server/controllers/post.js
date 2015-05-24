@@ -8,6 +8,6 @@ exports.init = function (app) {
   app.get('/api/posts/custom', custom);
 };
 
-async function custom () {
+function* custom () {
   this.body = 'custom post return';
 }
