@@ -8,5 +8,5 @@ var schema = new mongoose.Schema({
   lists: Array
 });
 
-var model = mongoose.model('user', schema);
+var model = mongoose.model('users', schema);
 module.exports =  model;

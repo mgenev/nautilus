@@ -3,9 +3,8 @@ const koa = require('koa');
 const router = require('koa-router');
 const logger = require('koa-logger');
 const generateApi = require('koa-mongo-rest');
-const mongoUrl = '127.0.0.1:27017';
 const mongoose = require('mongoose');
-mongoose.connect(mongoUrl);
+mongoose.connect('mongodb://localhost/nautilus');
 
 const app = koa();
 app.use(router(app));

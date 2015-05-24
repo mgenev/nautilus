@@ -4,5 +4,5 @@ var schema = new mongoose.Schema({
   content: String
 });
 
-var model = mongoose.model('post', schema);
+var model = mongoose.model('posts', schema);
 module.exports =  model;
