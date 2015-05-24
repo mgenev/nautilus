@@ -6,7 +6,6 @@ Building on the lessons of previous stacks, Nautilus aims to explore the latest 
 #### Core components
 + Aurelia - Client Side Framework
 + Node - Server Side
-+ Express - Web Server Framework
 + Mongoose - Node-Mongo ORM
 + MongoDB - Database
 
