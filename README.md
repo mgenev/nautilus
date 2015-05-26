@@ -16,6 +16,7 @@ Building on the lessons of previous stacks, Nautilus aims to explore the latest 
 
 #### Currently demonstrated features:
  - Geo service for Google Maps
+ - Automatically generated REST API for each model
 
 #### Open to contributors
 ==========================
