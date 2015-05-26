@@ -1,16 +1,7 @@
-/**
- * Post controller for serving user posts.
- */
-
 'use strict';
 
-var route = require('koa-route');
-
-// register koa routes
-exports.init = function (app) {
-  app.get('/api/users/custom', custom);
+module.exports = {
+  get_custom: function* get_custom() {
+    this.body = 'custom user return';
+  }
 };
-
-function* custom() {
-  this.body = 'custom user return';
-}

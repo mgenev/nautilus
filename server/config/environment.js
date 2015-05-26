@@ -7,6 +7,7 @@ var path = require('path'),
 
 var baseConfig = {
   app: {
+    apiPrefix: 'api',
     root: path.normalize(__dirname + '/../..'),
     env: process.env.NODE_ENV,
     secret: process.env.SECRET || 'secret key' /* used in signing the jwt tokens */
