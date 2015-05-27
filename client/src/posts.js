@@ -1,23 +1,16 @@
 import {inject} from 'aurelia-framework';
 import {HttpClient} from 'aurelia-http-client';
-import Config from './services/config';
+import {Config} from './services/config';
 
-console.log(Config);
-@inject(HttpClient)
+@inject(HttpClient, Config)
 export class Posts {
   heading = 'Posts';
   posts = [];
   endPoint = 'posts';
 
-  constructor(http){
+  constructor(http, config){
     this.http = http;
-    this.config = {
-      server: {
-        apiPrefix: '/api/',
-        address: 'http://localhost:3000',
-        url: 'http://localhost:3000/api/'
-      }
-    };
+    this.config = config;
   }
 
   async activate() {
