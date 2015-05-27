@@ -7,11 +7,10 @@ var fs = require('fs'),
     cors = require('koa-cors'),
     bodyParser = require('koa-bodyparser'),
     router = require('koa-router'),
-    config = require('./environment');
-
-var generateApi = require('koa-mongo-rest');
-var pluralize = require('pluralize');
-var mongoose = require('mongoose');
+    config = require('./environment'),
+    generateApi = require('koa-mongo-rest'),
+    pluralize = require('pluralize'),
+    mongoose = require('mongoose');
 
 module.exports = function (app) {
   // middleware configuration
@@ -28,26 +27,77 @@ module.exports = function (app) {
   // middleware below this line is only reached if jwt token is valid
   // TODO enable jwt auth app.use(jwt({secret: config.app.secret}));
 
-  // mount all the routes defined in the api controllers
-  fs.readdirSync(__dirname + '/../controllers').forEach(function (fileName) {
-    var controller = require(__dirname + '/../controllers/' + fileName);
-    fileName = fileName.substring(0, fileName.length - 3);
-    for (var propName in controller) {
-      var arr = propName.split('_');
-      var methodName = arr[0];
-      var handlerName = arr[1];
-      app[methodName]('/' + config.app.apiPrefix + '/' + pluralize(fileName) + '/' + handlerName, controller[propName]);
+  // auto mount all the simple routes defined in the api controllers
+  // initialize complex custom defined routes
+  var _iteratorNormalCompletion = true;
+  var _didIteratorError = false;
+  var _iteratorError = undefined;
+
+  try {
+    for (var _iterator = fs.readdirSync(__dirname + '/../controllers')[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+      var fileName = _step.value;
+
+      var controller = require(__dirname + '/../controllers/' + fileName);
+      fileName = fileName.substring(0, fileName.length - 3);
+      for (var propName in controller) {
+        if (propName === 'init') {
+          controller.init(app);
+        } else {
+          var arr = propName.split('_');
+          var methodName = arr[0];
+          var handlerName = arr[1];
+          app[methodName]('/' + config.app.apiPrefix + '/' + pluralize(fileName) + '/' + handlerName, controller[propName]);
+        }
+      }
     }
-  });
+  } catch (err) {
+    _didIteratorError = true;
+    _iteratorError = err;
+  } finally {
+    try {
+      if (!_iteratorNormalCompletion && _iterator['return']) {
+        _iterator['return']();
+      }
+    } finally {
+      if (_didIteratorError) {
+        throw _iteratorError;
+      }
+    }
+  }
+
+  ;
 
   // mount REST routes for all models
   var model = undefined,
       schema = undefined;
-  require('fs').readdirSync(__dirname + '/../models').forEach(function (name) {
-    if (name[0] === '.') return;
-    name = name.substring(0, name.length - 3);
-    schema = require('../models/' + name);
-    model = mongoose.model(pluralize(name), schema);
-    generateApi(app, model, '/' + config.app.apiPrefix);
-  });
+  var _iteratorNormalCompletion2 = true;
+  var _didIteratorError2 = false;
+  var _iteratorError2 = undefined;
+
+  try {
+    for (var _iterator2 = require('fs').readdirSync(__dirname + '/../models')[Symbol.iterator](), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {
+      var _name = _step2.value;
+
+      if (_name[0] === '.') return;
+      _name = _name.substring(0, _name.length - 3);
+      schema = require('../models/' + _name);
+      model = mongoose.model(pluralize(_name), schema);
+      generateApi(app, model, '/' + config.app.apiPrefix);
+    }
+  } catch (err) {
+    _didIteratorError2 = true;
+    _iteratorError2 = err;
+  } finally {
+    try {
+      if (!_iteratorNormalCompletion2 && _iterator2['return']) {
+        _iterator2['return']();
+      }
+    } finally {
+      if (_didIteratorError2) {
+        throw _iteratorError2;
+      }
+    }
+  }
+
+  ;
 };
