@@ -11,7 +11,7 @@
     "jsonwebtoken": "3.2.2",
     "koa": "^0.5.2",
     "koa-logger": "^1.2.0",
-    "koa-mongo-rest": "^0.3.1",
+    "koa-mongo-rest": "git://github.com/mgenev/koa-mongo-rest.git",
     "koa-router": "^3.1.2",
     "co": "4.5.4",
     "co-mongo": "0.0.2",

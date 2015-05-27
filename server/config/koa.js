@@ -1,8 +1,8 @@
 const fs = require('fs'),
     logger = require('koa-logger'),
     send = require('koa-send'),
-    jwt = require('koa-jwt'),
     cors = require('koa-cors'),
+    jwt = require('koa-jwt'),
     bodyParser = require('koa-bodyparser'),
     router = require('koa-router'),
     config = require('./environment'),
@@ -10,16 +10,21 @@ const fs = require('fs'),
     pluralize = require('pluralize'),
     mongoose = require('mongoose');
 
+
 module.exports = function (app) {
   // middleware configuration
   app.use(router(app));
   app.use(logger());
-  app.use(cors({
-    maxAge: config.app.cacheTime / 1000,
-    credentials: true,
-    methods: 'GET, HEAD, OPTIONS, PUT, POST, DELETE',
-    headers: 'Origin, X-Requested-With, Content-Type, Accept, Authorization'
-  }));
+
+  function *responseTime(next) {
+    var start = new Date;
+    yield next;
+    var ms = new Date - start;
+    this.set('X-Response-Time', ms + 'ms');
+  }
+
+  app.use(responseTime);
+  app.use(cors());
   app.use(bodyParser());
 
   // middleware below this line is only reached if jwt token is valid

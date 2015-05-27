@@ -6,7 +6,8 @@ export class App {
     config.title = 'Nautilus';
     config.map([
       { route: ['','welcome'],  moduleId: './welcome',      nav: true, title:'Welcome' },
-      { route: 'geo-demo',      moduleId: './geo-demo',      nav: true, title: 'Geo Demo' }
+      { route: 'geo-demo',      moduleId: './geo-demo',     nav: true, title: 'Geo Demo' },
+      { route: 'posts',      moduleId: './posts',           nav: true, title: 'Posts' }
     ]);
 
     this.router = router;
