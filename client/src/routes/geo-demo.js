@@ -1,5 +1,5 @@
 import {inject} from 'aurelia-framework';
-import {GeoGoogleService} from './services/geo-google';
+import {GeoGoogleService} from '../services/geo-google';
 import {EventAggregator} from 'aurelia-event-aggregator';
 
 @inject(GeoGoogleService, EventAggregator)
