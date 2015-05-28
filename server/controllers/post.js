@@ -1,5 +1,5 @@
 const mongoose = require('mongoose'),
-      post = mongoose.model('posts');
+      post = mongoose.model('post');
 
 module.exports = {
   init: function (app) {
@@ -17,6 +17,7 @@ let test = function* (next) {
     let result = yield post.findById(this.params.id).exec();
     return this.body = result;
   } catch (err) {
+    this.status = 404;
     return this.body = err;
   }
 }

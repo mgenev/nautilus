@@ -28,7 +28,7 @@ module.exports = function (app) {
     if (name[0] === '.') return;
     name = name.substring(0, name.length - 3);
     schema = require('../models/' + name);
-    model = mongoose.model(pluralize(name), schema);
+    model = mongoose.model(name, schema);
   };
 
   // auto mount all the simple routes defined in the api controllers
@@ -48,7 +48,7 @@ module.exports = function (app) {
     }
   };
 
-  // mount REST routes for all models last so it doesn't override
+  // mount REST routes for all models last so it doesn't override the controller methods
   for (let model of mongoose.modelNames()){
     generateApi(app, mongoose.model(model), '/' + config.app.apiPrefix);
   }

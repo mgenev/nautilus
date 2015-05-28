@@ -14,7 +14,12 @@ export class Posts {
   }
 
   async activate() {
-    let posts = await this.http.get(`${this.config.server.url}${this.endPoint}`);
-    this.posts = posts.content;
+    try {
+      let posts = await this.http.get(`${this.config.server.url}${this.endPoint}`);
+      this.posts = posts.content;
+    } catch (err) {
+      // TODO flash a global error message
+      console.log('error connecting: ', err);
+    }
   }
 }

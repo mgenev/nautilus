@@ -42,7 +42,11 @@ export class GeoDemo {
       pinMarkers: true
     };
 
-    this.places = await this.geo.getNearbyPlaces(opts);
+    try {
+      this.places = await this.geo.getNearbyPlaces(opts);
+    } catch (err) {
+      console.log('ERR: ', err);
+    }
   }
 
   showMarkerInfoWindow(i) {
