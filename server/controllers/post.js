@@ -1,3 +1,6 @@
+const mongoose = require('mongoose'),
+      post = mongoose.model('posts');
+
 module.exports = {
   init: function (app) {
     app.get('/api/posts/test/:id', test);
@@ -10,5 +13,10 @@ module.exports = {
 
 let test = function* (next) {
   yield next;
-  this.body = 'you passed param '+this.params.id;
+  try {
+    let result = yield post.findById(this.params.id).exec();
+    return this.body = result;
+  } catch (err) {
+    return this.body = err;
+  }
 }

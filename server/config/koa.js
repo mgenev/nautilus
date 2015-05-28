@@ -15,20 +15,21 @@ module.exports = function (app) {
   // middleware configuration
   app.use(router(app));
   app.use(logger());
-
-  function *responseTime(next) {
-    var start = new Date;
-    yield next;
-    var ms = new Date - start;
-    this.set('X-Response-Time', ms + 'ms');
-  }
-
   app.use(responseTime);
   app.use(cors());
   app.use(bodyParser());
 
   // middleware below this line is only reached if jwt token is valid
   // TODO enable jwt auth app.use(jwt({secret: config.app.secret}));
+
+  // create all models first so controllers have them available
+  let model, schema;
+  for (let name of require('fs').readdirSync(__dirname+'/../models')) {
+    if (name[0] === '.') return;
+    name = name.substring(0, name.length - 3);
+    schema = require('../models/' + name);
+    model = mongoose.model(pluralize(name), schema);
+  };
 
   // auto mount all the simple routes defined in the api controllers
   // initialize complex custom defined routes
@@ -47,13 +48,15 @@ module.exports = function (app) {
     }
   };
 
-  // mount REST routes for all models
-  let model, schema;
-  for (let name of require('fs').readdirSync(__dirname+'/../models')) {
-  	if (name[0] === '.') return;
-  	name = name.substring(0, name.length - 3);
-  	schema = require('../models/' + name);
-  	model = mongoose.model(pluralize(name), schema);
-  	generateApi(app, model, '/' + config.app.apiPrefix);
-  };
+  // mount REST routes for all models last so it doesn't override
+  for (let model of mongoose.modelNames()){
+    generateApi(app, mongoose.model(model), '/' + config.app.apiPrefix);
+  }
 };
+
+function *responseTime(next) {
+  var start = new Date;
+  yield next;
+  var ms = new Date - start;
+  this.set('X-Response-Time', ms + 'ms');
+}
