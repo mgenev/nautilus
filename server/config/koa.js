@@ -3,7 +3,8 @@ const fs = require('fs'),
     send = require('koa-send'),
     cors = require('koa-cors'),
     jwt = require('koa-jwt'),
-    bodyParser = require('koa-bodyparser'),
+    conditional = require('koa-conditional-get'),
+    etag = require('koa-etag'),
     router = require('koa-router'),
     config = require('./environment'),
     generateApi = require('koa-mongo-rest'),
@@ -13,11 +14,12 @@ const fs = require('fs'),
 
 module.exports = function (app) {
   // middleware configuration
+  app.use(conditional());
+  app.use(etag());
   app.use(router(app));
   app.use(logger());
   app.use(responseTime);
   app.use(cors());
-  app.use(bodyParser());
 
   // middleware below this line is only reached if jwt token is valid
   // TODO enable jwt auth app.use(jwt({secret: config.app.secret}));

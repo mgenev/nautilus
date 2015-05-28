@@ -4,5 +4,9 @@
     "gulp-babel": "*",
     "gulp-sourcemaps": "*",
     "source-map-support": "*"
+  },
+  "dependencies": {
+    "koa-conditional-get": "^1.0.3",
+    "koa-etag": "^2.0.0"
   }
 }
