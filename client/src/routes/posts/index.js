@@ -1,6 +1,6 @@
 import {inject} from 'aurelia-framework';
 import {HttpClient} from 'aurelia-http-client';
-import {Config} from '../../services/config';
+import {Config} from 'services/config';
 
 @inject(HttpClient, Config)
 export class Posts {
