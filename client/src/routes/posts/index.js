@@ -12,6 +12,7 @@ export class Posts {
     this.http = http;
     this.config = config;
   }
+  
 
   async activate() {
     try {
