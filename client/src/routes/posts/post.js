@@ -1,21 +1,18 @@
 import {inject} from 'aurelia-framework';
 import {HttpClient} from 'aurelia-http-client';
-import {Config} from '../../services/config';
-import {Router} from 'aurelia-router';
+import {Config} from 'services/config';
 
-@inject(HttpClient, Config, Router)
+@inject(HttpClient, Config)
 export class Posts {
   heading = 'Single Post';
   endPoint = 'posts';
 
-  constructor(http, config, router){
+  constructor(http, config){
     this.http = http;
     this.config = config;
-    this.router = router;
   }
 
   async activate(params, routeConfig) {
-    console.log(routeConfig);
     try {
       let post = await this.http.get(`${this.config.server.url}${this.endPoint}/${params.id}`);
       this.post = post.content;
