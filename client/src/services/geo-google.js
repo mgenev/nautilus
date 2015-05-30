@@ -9,19 +9,19 @@ class GeoGoogleService {
   constructor(http, eventAggregator) {
     this.http = http;
     this.eventAggregator = eventAggregator;
-    this.subscribe();
   }
 
-
-  subscribe() {
-    this.eventAggregator.subscribe('markerClick', function(marker) {
-      google.maps.event.trigger(marker, 'click');
-    });
+  placeListingClick(marker) {
+    google.maps.event.trigger(marker, 'click');
   }
 
   async getGeoposition() {
     return new Promise((resolve, reject) => {
-      let success = pos => resolve(pos.coords);
+      let success = pos => {
+        // TODO enable real geo eventually
+        // resolve(pos.coords)
+        resolve({latitude: 47.6268381,longitude: -122.3618504});
+      };
       let error = err => console.warn(`ERROR(${err.code}): ${err.message}`);
       navigator.geolocation.getCurrentPosition(success, error);
     });
@@ -77,9 +77,8 @@ class GeoGoogleService {
       window.markers.push(marker);
 
       google.maps.event.addListener(marker, 'click', () => {
-        // TODO try using aurelia's pub sub here instead of jquery
-        $('.place-active').removeClass('place-active');
-        $('.place-'+index).addClass('place-active');
+        this.eventAggregator.publish('googleMaps:markerClick', index);
+
         window.infoWindow.setContent(place.name);
         window.infoWindow.open(window.map, marker);
       });
@@ -93,7 +92,7 @@ class GeoGoogleService {
           }
         }
 
-        // let markerCluster = new MarkerClusterer(this.map, window.markers);
+        let markerCluster = new MarkerClusterer(window.map, window.markers);
         resolve(places);
       });
     });

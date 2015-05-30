@@ -1,0 +1,32 @@
+<template>
+  <section class="au-animate">
+    <h2>${heading}</h2>
+    <h4>${address}</h4>
+    <div class="row" ref="row">
+      <div class="col-sm-12">
+        <form role="form" submit.delegate="searchPlaces()">
+          <div class="input-group">
+            <span class="input-group-btn">
+              <button class="btn btn-default" type="submit">Go!</button>
+            </span>
+            <input type="text" value.bind=query class="form-control" placeholder="Search for..." >
+          </div><!-- /input-group -->
+        <form>
+      </div><!-- /col-sm-12 -->
+      <div class="col-sm-12">
+        <div id="mapfeed" class="bump"></div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-6 col-md-3" repeat.for="place of places">
+        <div class="${place.class}" click.trigger="$parent.showMarkerInfoWindow($index)">
+          <h5>${place.name}</h5>
+          <h6>${place.formatted_address}</h6>
+          <span repeat.for="type of place.types">
+            ${type}<span show.bind="!$last">, </span>
+          </span>
+        </div>
+      </div>
+    </div>
+  </section>
+</template>

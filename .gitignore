@@ -1,11 +1,13 @@
 node_modules
+es5_server/*
+!es5_server/package.json
 
 # Ignore configuration and automatically generated cruft
 dbconfig.php
 sitemap.xml
 *.log
 .sass-cache
-
+.settings
 # Operating system files
 .Spotlight-V100
 .Trashes
