@@ -26,9 +26,9 @@ This project is made for learning. There is no better experience for that than d
 ==========================
 1. Go to the client folder and follow the steps to install Aurelia's prerequisites Gulp and Jspm http://aurelia.io/get-started.html
 2. from ./ run `gulp babel` and `gulp watch` 
-3. `npm install` in both /client and /es5_server folders
+3. `npm install` in both /client and /server folders
 4. `jspm install -y` in /client
-5. run server with ./es5_server node server
+5. run server with ./server node run
 6. run client with ./client/gulp watch
 
 These instructions tell gulp to take the es6-7 code in /server and transpile it into /es5_server which we then run. With gulp watch in ./ any future changes to the /server code will be retranspiled into /es_server. If you use nodemon in /es5_server it will automatically reboot.
