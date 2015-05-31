@@ -4,8 +4,7 @@
     <div class="row">
       <div class="col-xs-6">
         <div repeat.for="post of posts">
-          <h5>${post.title}</h5>
-          <h6>${post.content}</h6>
+          <h5><a href="#/posts/${post._id}">${post.title}</a></h5>
         </div>
       </div>
     </div>

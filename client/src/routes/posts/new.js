@@ -1,25 +1,27 @@
 import {inject} from 'aurelia-framework';
 import {HttpClient} from 'aurelia-http-client';
 import {Config} from '../../services/config';
+import {Session} from '../../services/session';
 import {computedFrom} from 'aurelia-framework';
 import {Router} from 'aurelia-router';
 
-@inject(HttpClient, Config, Router)
+@inject(HttpClient, Config, Router, Session)
 export class NewPost {
   heading = 'Posts';
   endPoint = 'posts';
 
   @computedFrom('title', 'content')
   get post(){
-    return JSON.stringify({ title: this.title, content: this.content });
+    return { title: this.title, content: this.content, user: this.session.currentUser._id };
   }
 
-  constructor(http, config, router){
+  constructor(http, config, router, session){
     this.http = http.configure(x => {
       x.withHeader('Content-Type', 'application/json');
     });
     this.config = config;
     this.router = router;
+    this.session = session;
   }
 
   async createPost() {
