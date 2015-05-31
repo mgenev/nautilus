@@ -15,6 +15,8 @@
     "kcors": "^1.0.1",
     "koa": "^0.5.2",
     "koa-bodyparser": "2.0.0",
+    "koa-conditional-get": "^1.0.3",
+    "koa-etag": "^2.0.0",
     "koa-jwt": "1.0.0",
     "koa-logger": "1.2.2",
     "koa-mongo-rest": "0.3.3",
