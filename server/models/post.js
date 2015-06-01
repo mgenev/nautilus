@@ -9,7 +9,8 @@ let post = new mongoose.Schema({
     type: Schema.ObjectId,
     ref: 'user',
     autopopulate: true
-  }
+  },
+  tags: Array
 });
 
 post.plugin(autopopulate);

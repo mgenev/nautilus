@@ -2,10 +2,10 @@ import mongoose from 'mongoose';
 let post = mongoose.model('post');
 
 module.exports = {
-  init: function (app) {
+  init(app) {
     app.get('/api/posts/test/:id', test);
   },
-  get_custom: function* (next) {
+  * get_custom(next) {
     yield next;
     this.body = 'custom post return';
   }
