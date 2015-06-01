@@ -1,9 +1,9 @@
 import {inject} from 'aurelia-framework';
-import {GeoGoogleService} from '../services/geo-google';
+import {GeoGoogleService} from 'services/geo-google';
 import {EventAggregator} from 'aurelia-event-aggregator';
 
 @inject(GeoGoogleService, EventAggregator)
-export class GeoDemo {
+export class GeoIndex {
   heading = 'Geo Demo';
   constructor(geo, eventAggregator) {
     this.geo = geo;
