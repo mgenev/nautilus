@@ -1,3 +1,4 @@
+<div class="centered"><img src="http://i.imgur.com/qjcdEGR.jpg" /></div>
 
 Project Nautilus
 ==========================
