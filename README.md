@@ -2,7 +2,7 @@
 
 Project Nautilus
 ==========================
-Building on the lessons of previous stacks, Nautilus aims to explore the latest advances in full stack Javascript  for web development with the goal of being a lightweight, versatile and powerful.
+Building on the lessons of previous stacks, Nautilus aims to explore the latest advances in full stack Javascript  for web development with the goal of being lightweight, versatile and powerful.
 
 #### Core components
 + Aurelia - Client Side Framework
