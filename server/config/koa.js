@@ -1,15 +1,15 @@
-const fs = require('fs'),
-    logger = require('koa-logger'),
-    send = require('koa-send'),
-    cors = require('kcors'),
-    jwt = require('koa-jwt'),
-    conditional = require('koa-conditional-get'),
-    etag = require('koa-etag'),
-    router = require('koa-router'),
-    config = require('./environment'),
-    generateApi = require('koa-mongo-rest'),
-    pluralize = require('pluralize'),
-    mongoose = require('mongoose');
+import fs from 'fs';
+import logger from 'koa-logger';
+import send from 'koa-send';
+import cors from 'kcors';
+import jwt from 'koa-jwt';
+import conditional from 'koa-conditional-get';
+import etag from 'koa-etag';
+import router from'koa-router';
+import config from './environment';
+import generateApi from 'koa-mongo-rest';
+import pluralize from 'pluralize';
+import mongoose from 'mongoose';
 
 module.exports = function (app) {
   // middleware configuration

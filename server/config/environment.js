@@ -2,8 +2,8 @@
  * Environment variables and application configuration.
  */
 
-var path = require('path'),
-    _ = require('lodash');
+import path from 'path';
+import _ from 'lodash';
 
 var baseConfig = {
   app: {

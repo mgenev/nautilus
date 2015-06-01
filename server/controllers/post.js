@@ -1,5 +1,5 @@
-const mongoose = require('mongoose'),
-      post = mongoose.model('post');
+import mongoose from 'mongoose';
+let post = mongoose.model('post');
 
 module.exports = {
   init: function (app) {

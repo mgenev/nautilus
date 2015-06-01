@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+import mongoose from 'mongoose';
 module.exports = new mongoose.Schema({
   email: String,
   firstName: String,

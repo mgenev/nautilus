@@ -1,6 +1,6 @@
-const mongoose = require('mongoose'),
-      Schema = mongoose.Schema,
-      autopopulate = require('mongoose-autopopulate');
+import mongoose from 'mongoose';
+import autopopulate from 'mongoose-autopopulate';
+let Schema = mongoose.Schema;
 
 let post = new mongoose.Schema({
   title: String,

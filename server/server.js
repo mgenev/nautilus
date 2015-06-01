@@ -1,15 +1,12 @@
-const config = require('./config/environment'),
-    koaConfig = require('./config/koa'),
-    co = require('co'),
-    koa = require('koa'),
-    app = koa(),
-		mongoose = require('mongoose');
+import config from './config/environment';
+import koaConfig from './config/koa';
+import co from 'co';
+import koa from 'koa';
+import mongoose from 'mongoose';
 
+let app = koa();
 module.exports = app;
 
-/**
- * Initializes koa server. Returns a promise.
- */
 app.init = () => {
 	// connect to mongo
 	mongoose.connect('mongodb://localhost/nautilus');
