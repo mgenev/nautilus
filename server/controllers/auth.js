@@ -12,12 +12,7 @@ module.exports = {
       this.throw(401, 'Incorrect e-mail address.');
     } else if (user.password !== credentials.password) {
       this.throw(401, 'Incorrect password.');
-    } else {
-      // todo see how to do this in the schema for all user gets
-      delete user.password;
-      user.picture = '/api/users/' + user.id + '/picture';
     }
-
     // sign and send the token along with the user info
     let token = jwt.sign(user, config.app.secret, {expiresInMinutes: 90 * 24 * 60 /* 90 days */});
     this.body = {token,user};

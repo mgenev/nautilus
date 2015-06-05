@@ -1,5 +1,8 @@
 import mongoose from 'mongoose';
-module.exports = new mongoose.Schema({
+import mongooseHidden from 'mongoose-hidden';
+let Schema = mongoose.Schema;
+
+let user = new mongoose.Schema({
   email: String,
   firstName: String,
   lastName: String,
@@ -10,3 +13,12 @@ module.exports = new mongoose.Schema({
   zipcode: Number,
   userType: Number
 });
+
+user.plugin(mongooseHidden({
+  defaultHidden: {
+    "password": true,
+    "__v": true
+  }
+}));
+
+module.exports = user;
