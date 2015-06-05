@@ -1,8 +1,8 @@
-import mongoose from 'mongoose';
+import {Schema} from 'mongoose';
+import {SimpleTimestamps} from 'mongoose-SimpleTimestamps';
 import mongooseHidden from 'mongoose-hidden';
-let Schema = mongoose.Schema;
 
-let user = new mongoose.Schema({
+let user = new Schema({
   email: String,
   firstName: String,
   lastName: String,
@@ -14,6 +14,7 @@ let user = new mongoose.Schema({
   userType: Number
 });
 
+user.plugin(SimpleTimestamps);
 user.plugin(mongooseHidden({
   defaultHidden: {
     "password": true,
