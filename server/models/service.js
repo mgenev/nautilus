@@ -1,5 +1,7 @@
 import mongoose from 'mongoose';
 import autopopulate from 'mongoose-autopopulate';
+import {SimpleTimestamps} from 'mongoose-SimpleTimestamps';
+
 let Schema = mongoose.Schema;
 
 let service = new mongoose.Schema({

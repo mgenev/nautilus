@@ -1,9 +1,9 @@
-import mongoose from 'mongoose';
+import {Schema} from 'mongoose';
 import autopopulate from 'mongoose-autopopulate';
 import GeoJSON from 'mongoose-geojson-schema';
-let Schema = mongoose.Schema;
+import {SimpleTimestamps} from 'mongoose-SimpleTimestamps';
 
-let status = new mongoose.Schema({
+let status = new Schema({
   user: {
     type: Schema.ObjectId,
     ref: 'user',
@@ -16,6 +16,7 @@ let status = new mongoose.Schema({
   address:String
 });
 
+status.plugin(SimpleTimestamps);
 status.plugin(autopopulate);
 
 module.exports = status;

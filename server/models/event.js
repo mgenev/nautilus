@@ -1,9 +1,9 @@
-import mongoose from 'mongoose';
+import {Schema} from 'mongoose';
 import autopopulate from 'mongoose-autopopulate';
 import GeoJSON from 'mongoose-geojson-schema';
-let Schema = mongoose.Schema;
+import {SimpleTimestamps} from 'mongoose-SimpleTimestamps';
 
-let event = new mongoose.Schema({
+let event = new Schema({
   organizer: {
     type: Schema.ObjectId,
     ref: 'user',
@@ -21,6 +21,7 @@ let event = new mongoose.Schema({
   eventDate: Date
 });
 
+event.plugin(SimpleTimestamps);
 event.plugin(autopopulate);
 
 module.exports = event;

@@ -1,8 +1,8 @@
-import mongoose from 'mongoose';
+import {Schema} from 'mongoose';
 import autopopulate from 'mongoose-autopopulate';
-let Schema = mongoose.Schema;
+import {SimpleTimestamps} from 'mongoose-SimpleTimestamps';
 
-let post = new mongoose.Schema({
+let post = new Schema({
   title: String,
   content: String,
   user: {
@@ -13,6 +13,7 @@ let post = new mongoose.Schema({
   tags: Array
 });
 
+post.plugin(SimpleTimestamps);
 post.plugin(autopopulate);
 
 module.exports = post;

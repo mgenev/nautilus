@@ -1,9 +1,9 @@
-import mongoose from 'mongoose';
+import {Schema} from 'mongoose';
 import autopopulate from 'mongoose-autopopulate';
 import GeoJSON from 'mongoose-geojson-schema';
-let Schema = mongoose.Schema;
+import {SimpleTimestamps} from 'mongoose-SimpleTimestamps';
 
-let album = new mongoose.Schema({
+let album = new Schema({
   user: {
     type: Schema.ObjectId,
     ref: 'user',
@@ -16,6 +16,7 @@ let album = new mongoose.Schema({
   tags : [String]
 });
 
+album.plugin(SimpleTimestamps);
 album.plugin(autopopulate);
 
 module.exports = album;

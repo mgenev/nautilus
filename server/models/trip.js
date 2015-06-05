@@ -1,9 +1,9 @@
-import mongoose from 'mongoose';
+import {Schema} from 'mongoose';
 import autopopulate from 'mongoose-autopopulate';
 import GeoJSON from 'mongoose-geojson-schema';
-let Schema = mongoose.Schema;
+import {SimpleTimestamps} from 'mongoose-SimpleTimestamps';
 
-let trip = new mongoose.Schema({
+let trip = new Schema({
   user: {
     type: Schema.ObjectId,
     ref: 'user',
@@ -18,6 +18,7 @@ let trip = new mongoose.Schema({
   photos: [{ type: Schema.Types.ObjectId, ref: 'photo' }]
 });
 
+trip.plugin(SimpleTimestamps);
 trip.plugin(autopopulate);
 
 module.exports = trip;

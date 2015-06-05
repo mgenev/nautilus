@@ -1,9 +1,9 @@
-import mongoose from 'mongoose';
+import {Schema} from 'mongoose';
 import autopopulate from 'mongoose-autopopulate';
 import GeoJSON from 'mongoose-geojson-schema';
-let Schema = mongoose.Schema;
+import {SimpleTimestamps} from 'mongoose-SimpleTimestamps';
 
-let vendor = new mongoose.Schema({
+let vendor = new Schema({
   user: {
     type: Schema.ObjectId,
     ref: 'user',
@@ -17,6 +17,7 @@ let vendor = new mongoose.Schema({
   category: String
 });
 
+vendor.plugin(SimpleTimestamps);
 vendor.plugin(autopopulate);
 
 module.exports = vendor;
