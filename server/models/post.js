@@ -1,6 +1,7 @@
 import {Schema} from 'mongoose';
 import autopopulate from 'mongoose-autopopulate';
 import {SimpleTimestamps} from 'mongoose-SimpleTimestamps';
+import permalink from 'mongoose-permalink';
 
 let post = new Schema({
   title: String,
@@ -13,6 +14,9 @@ let post = new Schema({
   tags: Array
 });
 
+post.plugin(permalink, {
+    sources: ['title']
+});
 post.plugin(SimpleTimestamps);
 post.plugin(autopopulate);
 

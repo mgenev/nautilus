@@ -30,6 +30,7 @@
     "mongoose-encrypted": "0.0.10",
     "mongoose-geojson-schema": "0.0.2",
     "mongoose-hidden": "^0.4.1",
+    "mongoose-permalink": "^2.0.0",
     "mongoose-simpletimestamps": "^1.0.2",
     "nimble": "0.0.2",
     "pluralize": "^1.1.2"
