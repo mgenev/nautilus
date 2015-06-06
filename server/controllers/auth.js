@@ -8,9 +8,11 @@ module.exports = {
     yield next;
     let credentials = this.request.body;
     let user = yield User.findOne({email: credentials.email}, {email: 1, name: 1, password: 1});
+    let valid = user.verifyPasswordSync(credentials.password);
+
     if (!user) {
       this.throw(401, 'Incorrect e-mail address.');
-    } else if (user.password !== credentials.password) {
+    } else if (!valid) {
       this.throw(401, 'Incorrect password.');
     }
     // sign and send the token along with the user info
