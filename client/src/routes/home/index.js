@@ -14,9 +14,3 @@ export class HomeIndex{
     alert(`Welcome, ${this.fullName}!`);
   }
 }
-
-export class UpperValueConverter {
-  toView(value){
-    return value && value.toUpperCase();
-  }
-}
