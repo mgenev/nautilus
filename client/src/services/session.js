@@ -1,9 +1,9 @@
 class Session {
   currentUser = {
-    email: "new@new.com",
-    firstName: "new",
-    lastName: "new",
-    _id: "556aa218f79e63142920873a"
+    email: "user@user.com",
+    firstName: "joe",
+    lastName: "baboon",
+    _id: "5573a830d1fe9fab9b421ffb"
   }
 }
 

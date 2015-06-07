@@ -1,0 +1,12 @@
+<template>
+  <section class="au-animate">
+    <h2>${heading}</h2>
+    <div class="row">
+      <div class="col-xs-6">
+        <div repeat.for="vendor of vendors">
+          <h5><a href="#/vendors/${vendor._id}">${vendor.name}</a></h5>
+        </div>
+      </div>
+    </div>
+  </section>
+</template>
