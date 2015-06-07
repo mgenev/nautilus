@@ -4,30 +4,27 @@ import {Config} from '../../services/config';
 import {Session} from '../../services/session';
 import {computedFrom} from 'aurelia-framework';
 import {Router} from 'aurelia-router';
+import {GeoGoogleService} from 'services/geo-google';
 
-@inject(HttpClient, Config, Router, Session)
+@inject(HttpClient, Config, Router, Session, GeoGoogleService)
 export class NewVendor {
   heading = 'Vendor';
   endPoint = 'vendors';
+  vendor = {};
 
-  @computedFrom('name', 'description')
-  get vendor(){
-    return { name: this.name, description: this.description, user: this.session.currentUser._id };
-  }
-
-  constructor(http, config, router, session){
-    this.http = http.configure(x => {
-      x.withHeader('Content-Type', 'application/json');
-    });
+  constructor(http, config, router, session, geo){
+    this.http = http;
     this.config = config;
     this.router = router;
     this.session = session;
+    this.geo = geo;
   }
 
   async createPost() {
     try {
-      let new = await this.http.post(`${this.config.server.url}${this.endPoint}`, this.vendor);
-      this.router.navigateToRoute('vendorById', {id: new.content._id});
+      this.vendor.location = await this.geo.getLatLongForAddress(this.vendor.address);
+      let newVendor = await this.http.post(`${this.config.server.url}${this.endPoint}`, this.vendor);
+      this.router.navigateToRoute('vendorById', {id: newVendor.content._id});
     } catch (err) {
       // TODO flash a global error message
       console.log('error connecting: ', err);
