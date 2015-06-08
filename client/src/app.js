@@ -11,7 +11,7 @@ export class App {
       { route: 'posts/:id',      moduleId: './routes/posts/post',      name: 'postById'},
       { route: 'posts/new',      moduleId: './routes/posts/new',           nav: true, title: 'New Post' },
       { route: 'vendors',        moduleId: './routes/vendors/index',     name: 'vendors', nav: true, title: 'Vendors' },
-      { route: 'vendors/:id',    moduleId: './routes/vendors/post',      name: 'vendorById'},
+      { route: 'vendors/:id',    moduleId: './routes/vendors/vendor',      name: 'vendorById'},
       { route: 'vendors/new',    moduleId: './routes/vendors/new',           nav: true, title: 'New Vendor' }
     ]);
 
