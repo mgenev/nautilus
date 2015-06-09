@@ -31,9 +31,6 @@ class GeoGoogleService {
   }
 
   async geocoding(lookup, reverse) {
-    this.http = this.http.configure(x => {
-      x.withHeader('Content-Type', 'text/plain');
-    });
     let url = reverse ? `https://maps.googleapis.com/maps/api/geocode/json?latlng=${lookup.latitude},${lookup.longitude}` : `https://maps.googleapis.com/maps/api/geocode/json?address=${lookup}`;
     return this.http.post(url);
   }

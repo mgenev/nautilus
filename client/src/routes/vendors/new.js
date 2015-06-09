@@ -25,9 +25,6 @@ export class NewVendor {
     try {
       this.vendor.location = await this.geo.getLatLongForAddress(this.vendor.address);
       this.vendor.user = this.session.currentUser._id;
-      this.http = this.http.configure(x => {
-        x.withHeader('Content-Type', 'application/json');
-      });
       let newVendor = await this.http.post(`${this.config.server.url}${this.endPoint}`, this.vendor);
       this.router.navigateToRoute('vendorById', {id: newVendor.content._id});
     } catch (err) {

@@ -16,9 +16,7 @@ export class NewPost {
   }
 
   constructor(http, config, router, session){
-    this.http = http.configure(x => {
-      x.withHeader('Content-Type', 'application/json');
-    });
+    this.http = http;
     this.config = config;
     this.router = router;
     this.session = session;
