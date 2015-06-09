@@ -15,6 +15,8 @@
         <label>Full Name</label>
         <p class="help-block">${fullName | uppercase}</p>
       </div>
+      <input type="text" click.delegate="consumer=$event.target.value" class="form-control" placeholder="click me">
+      ${consumer}
       <button type="submit" class="btn btn-default">Submit</button>
     </form>
   </section>
