@@ -1,9 +1,12 @@
 <template>
-  <require from='components/nav-bar'></require>
+  <require from='components/nav-bar/nav-bar'></require>
+  <require from='components/side-bar/side-bar'></require>
+  <div class="wrapper">
+    <nav-bar router.bind="router"></nav-bar>
+    <side-bar router.bind="router"></side-bar>
 
-  <nav-bar router.bind="router"></nav-bar>
-
-  <div class="page-host">
-    <router-view></router-view>
+    <div class="page-host">
+      <router-view></router-view>
+    </div>
   </div>
 </template>
