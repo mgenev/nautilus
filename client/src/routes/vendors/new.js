@@ -1,9 +1,8 @@
+import {Router} from 'aurelia-router';
 import {inject} from 'aurelia-framework';
 import {HttpClient} from 'aurelia-http-client';
-import {Config} from '../../services/config';
-import {Session} from '../../services/session';
-import {computedFrom} from 'aurelia-framework';
-import {Router} from 'aurelia-router';
+import {Config} from 'services/config';
+import {Session} from 'services/session';
 import {GeoGoogleService} from 'services/geo-google';
 
 @inject(HttpClient, Config, Router, Session, GeoGoogleService)
@@ -12,8 +11,7 @@ export class NewVendor {
   endPoint = 'vendors';
   vendor = {};
 
-  constructor(http, config, router, session, geo){
-
+  constructor(http, config, router, session, geo) {
     this.http = http;
     this.config = config;
     this.router = router;
@@ -21,7 +19,7 @@ export class NewVendor {
     this.geo = geo;
   }
 
-  async createPost() {
+  async createVendor() {
     try {
       this.vendor.location = await this.geo.getLatLongForAddress(this.vendor.address);
       this.vendor.user = this.session.currentUser._id;

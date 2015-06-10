@@ -6,6 +6,7 @@ import {Config} from 'services/config';
 export class Posts {
   heading = 'Single Vendor';
   endPoint = 'vendors';
+  services = ['service1', 'service2'];
 
   constructor(http, config){
     this.http = http;
@@ -16,7 +17,7 @@ export class Posts {
     try {
       let vendor = await this.http.get(`${this.config.server.url}${this.endPoint}/${params.id}`);
       this.vendor = vendor.content;
-      routeConfig.navModel.title = this.vendor.title;
+      routeConfig.navModel.title = this.vendor.name;
     } catch (err) {
       // TODO flash a global error message
       console.log('error connecting: ', err);
