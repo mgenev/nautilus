@@ -1,5 +1,5 @@
 import {bindable} from 'aurelia-framework';
 
-export class NavBar {
+export class LeftSideBar {
   @bindable router = null;
 }
