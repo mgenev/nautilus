@@ -1,7 +1,14 @@
 <template>
-  <section class="au-animate">
-    <h2>${heading}</h2>
+  <section class="content-header">
+    <h1>${heading}</h1>
     <h4>${address}</h4>
+    <!-- TODO make a breadcrumb component that takes data to render it -->
+    <ol class="breadcrumb">
+      <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+      <li class="active">Geo</li>
+    </ol>
+  </section>
+  <section class="content">
     <div class="row" ref="row">
       <div class="col-sm-12">
         <form role="form" submit.delegate="searchPlaces()">
