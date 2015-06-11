@@ -15,7 +15,7 @@ var cleancss = new LessPluginCleanCSS({ advanced: true });
 var autoprefix= new LessPluginAutoPrefix({ browsers: ["last 2 versions"] });
 
 gulp.task('less', function(){
-  return compileFile(paths.style, paths.output, {compress: true});
+  return compileFile(paths.styleEntry, paths.output, {compress: true});
 });
 
 /**

@@ -17,8 +17,6 @@
       </div>
       <input type="text" click.delegate="consumer=$event.target.value" class="form-control" placeholder="click me">
       ${consumer}
-      <input type="text" click.delegate="consumer2.innerHTML=$event.target.value" class="form-control" placeholder="click me">
-      <div view-model.ref="consumer2"></div>
       <button type="submit" class="btn btn-default">Submit</button>
     </form>
   </section>
