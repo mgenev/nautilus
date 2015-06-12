@@ -1,3 +1,4 @@
+
 export class App {
   configureRouter(config, router){
     config.title = 'Nautilus';
@@ -14,4 +15,5 @@ export class App {
 
     this.router = router;
   }
+
 }
