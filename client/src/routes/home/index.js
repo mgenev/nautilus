@@ -1,6 +1,4 @@
-import $ from 'jquery';
-import initLayout from 'utils/init-layout';
-
+import initLayout from 'utils/layout/init';
 import {computedFrom} from 'aurelia-framework';
 
 export class HomeIndex{
