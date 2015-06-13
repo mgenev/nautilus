@@ -1,15 +1,14 @@
 import $ from 'jquery';
 import config from 'utils/layout/config';
-// import slimscroll from 'utils/layout/slimscroll';
+import slimscroll from 'utils/layout/slimscroll';
 
 export class HeaderMain {
   attached() {
     var o = $.AdminLTE.options;
-
     //Add slimscroll to navbar dropdown
-    debugger;
+    console.log('YO!', $.fn.slimScroll);
     if (o.navbarMenuSlimscroll && typeof $.fn.slimScroll != 'undefined') {
-      console.log('YO!');
+
       $(".navbar .menu").slimScroll({
         height: o.navbarMenuHeight,
         alwaysVisible: false,
