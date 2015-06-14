@@ -1,39 +1,45 @@
 <template>
-  <section class="content-header">
-    <h1>${heading}</h1>
-    <h4>${address}</h4>
-    <!-- TODO make a breadcrumb component that takes data to render it -->
-    <ol class="breadcrumb">
-      <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-      <li class="active">Geo</li>
-    </ol>
-  </section>
-  <section class="content">
-    <div class="row" ref="row">
-      <div class="col-sm-12">
-        <form role="form" submit.delegate="searchPlaces()">
-          <div class="input-group">
-            <span class="input-group-btn">
-              <button class="btn btn-default" type="submit">Go!</button>
-            </span>
-            <input type="text" value.bind=query class="form-control" placeholder="Search for..." >
-          </div><!-- /input-group -->
-        <form>
-      </div><!-- /col-sm-12 -->
-      <div class="col-sm-12">
-        <div id="mapfeed" class="bump"></div>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-sm-6 col-md-3" repeat.for="place of places">
-        <div class="${place.class}" click.trigger="$parent.showMarkerInfoWindow($index)">
-          <h5>${place.name}</h5>
-          <h6>${place.formatted_address}</h6>
-          <span repeat.for="type of place.types">
-            ${type}<span show.bind="!$last">, </span>
-          </span>
+  <require from='components/layout-admin/layout-admin'></require>
+  <layout-admin>
+    <section class="content-header">
+      <h1>${heading}</h1>
+      <h4>${address}</h4>
+      <!-- TODO make a breadcrumb component that takes data to render it -->
+      <ol class="breadcrumb">
+        <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+        <li class="active">Geo</li>
+      </ol>
+    </section>
+    <section class="content">
+      <div class="row" ref="row">
+        <div class="col-sm-12">
+          <form role="form" submit.delegate="searchPlaces()">
+            <div class="input-group">
+              <span class="input-group-btn">
+                <button class="btn btn-default" type="submit">Go!</button>
+              </span>
+              <input type="text" value.bind=query class="form-control" placeholder="Search for...">
+            </div>
+            <!-- /input-group -->
+            <form>
+        </div>
+        <!-- /col-sm-12 -->
+        <div class="col-sm-12">
+          <div id="mapfeed" class="bump"></div>
         </div>
       </div>
-    </div>
-  </section>
+      <div class="row">
+        <div class="col-sm-6 col-md-3" repeat.for="place of places">
+          <div class="${place.class}" click.trigger="$parent.showMarkerInfoWindow($index)">
+            <h5>${place.name}</h5>
+            <h6>${place.formatted_address}</h6>
+            <span repeat.for="type of place.types">
+              ${type}
+              <span show.bind="!$last">, </span>
+            </span>
+          </div>
+        </div>
+      </div>
+    </section>
+  </layout-admin>
 </template>

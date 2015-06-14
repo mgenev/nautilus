@@ -1,18 +1,23 @@
 <template>
+  <require from='components/layout-admin/layout-admin'></require>
   <require from='./service-list'></require>
   <require from='./service-add'></require>
-  <div class="container">
-    <div class="page-header">
-      <h2>${vendor.name} <small>by ${vendor.user.email}</small></h2>
+  <layout-admin>
+    <div class="container">
+      <div class="page-header">
+        <h2>${vendor.name}
+          <small>by ${vendor.user.email}</small>
+        </h2>
+      </div>
+      <div class="col-xs-6">
+        <p>${vendor.description}</p>
+      </div>
+      <div class="col-xs-6">
+        <service-list services.bind="services"></service-list>
+      </div>
+      <div class="col-xs-6">
+        <service-add vendor.bind="vendor"></service-list>
+      </div>
     </div>
-    <div class="col-xs-6">
-      <p>${vendor.description}</p>
-    </div>
-    <div class="col-xs-6">
-      <service-list services.bind="services"></service-list>
-    </div>
-    <div class="col-xs-6">
-      <service-add vendor.bind="vendor"></service-list>
-    </div>
-  </div>
+  </layout-admin>
 </template>

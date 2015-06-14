@@ -1,26 +1,29 @@
 <template>
-  <section class="content-header">
-    <h1>${heading}</h1>
-  </section>
-  <section class="content">
-    <div class="row" ref="row">
-      <div class="col-sm-12">
-        <form submit.delegate="createVendor()">
-          <div class="form-group bump">
-            <label for="name">Name</label>
-            <input type="text" value.bind="vendor.name" class="form-control" id="name" placeholder="Name">
-          </div>
-          <div class="form-group">
-            <label for="address">Address</label>
-            <input type="text" value.bind="vendor.address" class="form-control" id="address" placeholder="address">
-          </div>
-          <div class="form-group">
-            <label for="description">Description</label>
-            <textarea value.bind="vendor.description" class="form-control" id="description" placeholder="Description"></textarea>
-          </div>
-          <button class="btn btn-default" type="submit">Create Vendor</button>
-        </form>
+  <require from='components/layout-admin/layout-admin'></require>
+  <layout-admin>
+    <section class="content-header">
+      <h1>${heading}</h1>
+    </section>
+    <section class="content">
+      <div class="row" ref="row">
+        <div class="col-sm-12">
+          <form submit.delegate="createVendor()">
+            <div class="form-group bump">
+              <label for="name">Name</label>
+              <input type="text" value.bind="vendor.name" class="form-control" id="name" placeholder="Name">
+            </div>
+            <div class="form-group">
+              <label for="address">Address</label>
+              <input type="text" value.bind="vendor.address" class="form-control" id="address" placeholder="address">
+            </div>
+            <div class="form-group">
+              <label for="description">Description</label>
+              <textarea value.bind="vendor.description" class="form-control" id="description" placeholder="Description"></textarea>
+            </div>
+            <button class="btn btn-default" type="submit">Create Vendor</button>
+          </form>
+        </div>
       </div>
-    </div>
-  </section>
+    </section>
+  </layout-admin>
 </template>

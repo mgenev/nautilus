@@ -1,10 +1,13 @@
 <template>
-  <div class="container">
-    <div class="page-header">
-      <h2>${post.title} <small>by ${post.user.firstName} ${post.user.lastName}</small></h2>
+  <require from='components/layout-admin/layout-admin'></require>
+  <layout-admin>
+    <div class="container">
+      <div class="page-header">
+        <h2>${post.title} <small>by ${post.user.firstName} ${post.user.lastName}</small></h2>
+      </div>
+      <div class="col-xs-6">
+        <p>${post.content}</p>
+      </div>
     </div>
-    <div class="col-xs-6">
-      <p>${post.content}</p>
-    </div>
-  </div>
+  </layout-admin>
 </template>

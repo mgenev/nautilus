@@ -6,7 +6,6 @@ export class HeaderMain {
   attached() {
     var o = $.AdminLTE.options;
     //Add slimscroll to navbar dropdown
-    console.log('YO!', $.fn.slimScroll);
     if (o.navbarMenuSlimscroll && typeof $.fn.slimScroll != 'undefined') {
 
       $(".navbar .menu").slimScroll({
