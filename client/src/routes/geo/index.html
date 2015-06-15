@@ -29,7 +29,7 @@
           <div id="mapfeed" class="bump"></div>
         </div>
       </div>
-      <div class="row bump">
+      <div class="bump">
         <div class="list-group">
           <div repeat.for="place of places">
             <!-- <div class="${place.class}" click.trigger="$parent.showMarkerInfoWindow($index)">
@@ -40,7 +40,9 @@
                 <span show.bind="!$last">, </span>
               </span>
             </div> -->
-              <place-card><place-card>
+              <div class="list-group">
+                <place-card><place-card>
+              </div>
             </div>
         </div>
       </div>
