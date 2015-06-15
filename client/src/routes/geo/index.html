@@ -1,5 +1,6 @@
 <template>
   <require from='components/layout-admin/layout-admin'></require>
+  <require from='./place-card/place-card'></require>
   <layout-admin>
     <section class="content-header">
       <h1>${heading}</h1>
@@ -28,16 +29,19 @@
           <div id="mapfeed" class="bump"></div>
         </div>
       </div>
-      <div class="row">
-        <div class="col-sm-6 col-md-3" repeat.for="place of places">
-          <div class="${place.class}" click.trigger="$parent.showMarkerInfoWindow($index)">
-            <h5>${place.name}</h5>
-            <h6>${place.formatted_address}</h6>
-            <span repeat.for="type of place.types">
-              ${type}
-              <span show.bind="!$last">, </span>
-            </span>
-          </div>
+      <div class="row bump">
+        <div class="list-group">
+          <div repeat.for="place of places">
+            <!-- <div class="${place.class}" click.trigger="$parent.showMarkerInfoWindow($index)">
+              <h5>${place.name}</h5>
+              <h6>${place.formatted_address}</h6>
+              <span repeat.for="type of place.types">
+                ${type}
+                <span show.bind="!$last">, </span>
+              </span>
+            </div> -->
+              <place-card><place-card>
+            </div>
         </div>
       </div>
     </section>
