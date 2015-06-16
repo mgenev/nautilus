@@ -8,6 +8,6 @@ export class MapGoogle {
   }
 
   attached() {
-    this.ea.publish('googleMaps:mapRendered');
+    this.ea.publish('googleMaps:mapContainerRendered');
   }
 }
