@@ -1,10 +1,17 @@
 <template>
   <require from='components/layout-admin/layout-admin'></require>
   <layout-admin>
-    <section class="au-animate">
-      <h2>${heading}</h2>
-      <div class="row">
-        <div class="col-xs-6">
+    <section class="content-header">
+      <h1>${heading}</h1>
+      <!-- TODO make a breadcrumb component that takes data to render it -->
+      <ol class="breadcrumb">
+        <li><a href="#"><i class="fa fa-home"></i> Home</a></li>
+        <li class="active">Posts</li>
+      </ol>
+    </section>
+    <section class="content">
+      <div class="row" ref="row">
+        <div class="col-sm-12">
           <div repeat.for="post of posts">
             <h5><a href="#/posts/${post._id}">${post.title}</a></h5>
           </div>

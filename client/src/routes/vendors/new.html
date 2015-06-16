@@ -3,6 +3,12 @@
   <layout-admin>
     <section class="content-header">
       <h1>${heading}</h1>
+      <!-- TODO make a breadcrumb component that takes data to render it -->
+      <ol class="breadcrumb">
+        <li><a href="#"><i class="fa fa-home"></i> Home</a></li>
+        <li><a href="#/vendors">Vendors</a></li>
+        <li class="active">New Vendor</li>
+      </ol>
     </section>
     <section class="content">
       <div class="row" ref="row">

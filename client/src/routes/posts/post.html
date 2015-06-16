@@ -1,13 +1,21 @@
 <template>
   <require from='components/layout-admin/layout-admin'></require>
   <layout-admin>
-    <div class="container">
-      <div class="page-header">
-        <h2>${post.title} <small>by ${post.user.firstName} ${post.user.lastName}</small></h2>
+    <section class="content-header">
+      <h1>${post.title} <small>by ${post.user.firstName} ${post.user.lastName}</small></h1>
+      <!-- TODO make a breadcrumb component that takes data to render it -->
+      <ol class="breadcrumb">
+        <li><a href="#"><i class="fa fa-home"></i> Home</a></li>
+        <li><a href="#/posts">Posts</a></li>
+        <li class="active">Single Post</li>
+      </ol>
+    </section>
+    <section class="content">
+      <div class="row" ref="row">
+        <div class="col-sm-12">
+          <p>${post.content}</p>
+        </div>
       </div>
-      <div class="col-xs-6">
-        <p>${post.content}</p>
-      </div>
-    </div>
+    </section>
   </layout-admin>
 </template>

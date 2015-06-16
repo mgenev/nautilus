@@ -3,21 +3,31 @@
   <require from='./service-list'></require>
   <require from='./service-add'></require>
   <layout-admin>
-    <div class="container">
-      <div class="page-header">
-        <h2>${vendor.name}
-          <small>by ${vendor.user.email}</small>
-        </h2>
+    <section class="content-header">
+      <h1>${vendor.name}
+        <small>by ${vendor.user.email}</small>
+      </h1>
+      <!-- TODO make a breadcrumb component that takes data to render it -->
+      <ol class="breadcrumb">
+        <li><a href="#"><i class="fa fa-home"></i> Home</a></li>
+        <li><a href="#/vendors">Vendors</a></li>
+        <li class="active">${vendor.name}</li>
+      </ol>
+    </section>
+    <section class="content">
+      <div class="row" ref="row">
+        <div class="col-sm-12">
+          <div class="col-xs-6">
+            <p>${vendor.description}</p>
+          </div>
+          <div class="col-xs-6">
+            <service-list services.bind="services"></service-list>
+          </div>
+          <div class="col-xs-6">
+            <service-add vendor.bind="vendor"></service-list>
+          </div>
+        </div>
       </div>
-      <div class="col-xs-6">
-        <p>${vendor.description}</p>
-      </div>
-      <div class="col-xs-6">
-        <service-list services.bind="services"></service-list>
-      </div>
-      <div class="col-xs-6">
-        <service-add vendor.bind="vendor"></service-list>
-      </div>
-    </div>
+    </section>
   </layout-admin>
 </template>
