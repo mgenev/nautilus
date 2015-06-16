@@ -13,23 +13,26 @@ export class GeoIndex {
   activate() {
     this.setGeo();
     this.eventAggregator.subscribe('googleMaps:markerClick', index => this.highlightPlace(index));
+    this.eventAggregator.subscribe('googleMaps:mapRendered', () => this.drawMap());
   }
 
   async setGeo() {
     try {
       this.geoData = await this.geo.getGeoposition();
       this.address = await this.geo.getAddressForLatLong(this.geoData);
-
-      let opts = {
-        geo: this.geoData,
-        mapElementSelector: 'mapfeed',
-        pinCenter: true,
-        type: 'ROADMAP'
-      };
-      this.geo.drawMap(opts);
     } catch (err) {
       console.log('ERR: ' , err);
     }
+  }
+
+  drawMap() {
+    let opts = {
+      geo: this.geoData,
+      mapElementSelector: 'mapfeed',
+      pinCenter: true,
+      type: 'ROADMAP'
+    };
+    this.geo.drawMap(opts);
   }
 
   async searchPlaces() {
@@ -44,13 +47,10 @@ export class GeoIndex {
 
     try {
       this.places = await this.geo.getNearbyPlaces(opts);
+      console.log(this.places);
     } catch (err) {
       console.log('ERR: ', err);
     }
-  }
-
-  showMarkerInfoWindow(i) {
-    this.geo.placeListingClick(window.markers[i]);
   }
 
   highlightPlace(index) {

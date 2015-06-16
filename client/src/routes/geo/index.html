@@ -1,6 +1,8 @@
 <template>
   <require from='components/layout-admin/layout-admin'></require>
+  <require from='components/map-google/map-google'></require>
   <require from='./place-card/place-card'></require>
+
   <layout-admin>
     <section class="content-header">
       <h1>${heading}</h1>
@@ -26,22 +28,14 @@
         </div>
         <!-- /col-sm-12 -->
         <div class="col-sm-12">
-          <div id="mapfeed" class="bump"></div>
+          <map-google></map-google>
         </div>
       </div>
       <div class="bump row">
         <div class="list-group">
           <div repeat.for="place of places">
-            <!-- <div class="${place.class}" click.trigger="$parent.showMarkerInfoWindow($index)">
-              <h5>${place.name}</h5>
-              <h6>${place.formatted_address}</h6>
-              <span repeat.for="type of place.types">
-                ${type}
-                <span show.bind="!$last">, </span>
-              </span>
-            </div> -->
               <div class="list-group">
-                <place-card><place-card>
+                <place-card index.bind="$index" class.bind="place.class" place.bind="place"><place-card>
               </div>
             </div>
         </div>

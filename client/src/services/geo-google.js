@@ -95,7 +95,7 @@ class GeoGoogleService {
           }
         }
 
-        let markerCluster = new MarkerClusterer(window.map, window.markers);
+        // let markerCluster = new MarkerClusterer(window.map, window.markers);
         resolve(places);
       });
     });

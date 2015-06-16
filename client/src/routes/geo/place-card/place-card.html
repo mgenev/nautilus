@@ -1,31 +1,34 @@
 <template>
   <div class="col-sm-6 ">
-    <div class="list-group-item place-card clearfix">
+    <div class="list-group-item place-card clearfix ${class}">
       <div class="media col-md-3">
         <figure class="pull-left">
-          <img class="media-object img-rounded img-responsive" src="http://placehold.it/350x250" alt="placehold.it/350x250">
+          <img class="media-object img-rounded img-responsive" src="${photoUrl}" alt="${place.name}">
         </figure>
       </div>
       <div class="col-md-6">
-        <h4 class="list-group-item-heading"> List group heading </h4>
-        <p class="list-group-item-text"> Qui diam libris ei, vidisse incorrupte at mel. His euismod salutandi dissentiunt eu. Habeo offendit ea mea. Nostro blandit sea ea, viris timeam molestiae an has. At nisl platonem eum. Vel et nonumy gubergren, ad has tota facilis probatus. Ea legere
-          legimus tibique cum, sale tantas vim ea, eu vivendo expetendis vim. Voluptua vituperatoribus et mel, ius no elitr deserunt mediocrem. Mea facilisi torquatos ad.
-        </p>
+        <h4 class="list-group-item-heading">${place.name}</h4>
+        <h5 class="list-group-item-heading">${place.formatted_address}</h4>
+        <h6><span repeat.for="type of place.types">
+          ${type}
+          <span show.bind="!$last">, </span>
+        </span></h6>
+        <p class="list-group-item-text"></p>
       </div>
       <div class="col-md-3 text-center">
-        <h2> 14240
-          <small> votes </small>
-        </h2>
-        <button type="button" class="btn btn-default btn-lg btn-block"> Vote Now! </button>
-        <div class="stars">
+        <h4> $144 <small> dollars </small></h4>
+        <button type="button" class="btn btn-default btn-block" click.trigger="showMarkerInfoWindow(index)">
+           Select
+        </button>
+        <!-- <div class="stars">
           <span class="glyphicon glyphicon-star"></span>
           <span class="glyphicon glyphicon-star"></span>
           <span class="glyphicon glyphicon-star"></span>
           <span class="glyphicon glyphicon-star"></span>
           <span class="glyphicon glyphicon-star-empty"></span>
-        </div>
-        <p> Average 4.5
-          <small> / </small> 5 </p>
+        </div> -->
+        <!-- <p> Average 4.5
+          <small> / </small> 5 </p> -->
       </div>
     </div>
   </div>

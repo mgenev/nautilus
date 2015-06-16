@@ -41,8 +41,6 @@ export class LeftSideBar {
         //Get the screen sizes
         var screenSizes = $.AdminLTE.options.screenSizes;
         //Enable sidebar toggle
-        console.log('toggleButton', toggleBtn);
-
         $(toggleBtn).on('click', function (e) {
           e.preventDefault();
           //Enable sidebar push menu
