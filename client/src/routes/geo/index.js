@@ -10,10 +10,13 @@ export class GeoIndex {
     this.eventAggregator = eventAggregator;
   }
 
+  attached () {
+    this.drawMap();
+  }
+
   activate() {
     this.setGeo();
     this.eventAggregator.subscribe('googleMaps:markerClick', index => this.highlightPlace(index));
-    this.eventAggregator.subscribe('googleMaps:mapContainerRendered', () => this.drawMap());
   }
 
   async setGeo() {

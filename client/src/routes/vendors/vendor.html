@@ -1,5 +1,6 @@
 <template>
   <require from='components/layout-admin/layout-admin'></require>
+  <require from='components/map-google/map-google'></require>
   <require from='./service-list'></require>
   <require from='./service-add'></require>
   <layout-admin>
@@ -15,17 +16,20 @@
       </ol>
     </section>
     <section class="content">
-      <div class="row" ref="row">
-        <div class="col-sm-12">
-          <div class="col-xs-6">
-            <p>${vendor.description}</p>
-          </div>
-          <div class="col-xs-6">
-            <service-list services.bind="services"></service-list>
-          </div>
-          <div class="col-xs-6">
-            <service-add vendor.bind="vendor"></service-list>
-          </div>
+      <div class="row">
+        <div class="col-sm-6">
+          <p>${vendor.description}</p>
+        </div>
+        <div class="col-sm-6 vendor">
+          <map-google></map-google>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-6">
+          <service-list services.bind="services"></service-list>
+        </div>
+        <div class="col-sm-6">
+          <service-add vendor.bind="vendor"></service-list>
         </div>
       </div>
     </section>

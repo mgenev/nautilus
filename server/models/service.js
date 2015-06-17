@@ -11,7 +11,8 @@ let service = new mongoose.Schema({
     autopopulate: true
   },
   name:String,
-  description: String
+  description: String,
+  price: Number
   // TODO hours, dates available etc. possibly locations
 });
 
