@@ -7,6 +7,10 @@ import {GeoGoogleService} from 'services/geo-google';
 @inject(HttpClient, Config, EventAggregator, GeoGoogleService)
 export class Posts {
   heading = 'Single Vendor';
+  readyToDrawMap = {
+    domReady: false,
+    vendorDataReady: false
+  };
 
   constructor(http, config, ea, geo){
     this.http = http;
@@ -16,26 +20,9 @@ export class Posts {
     this.ea.subscribe('vendors:serviceCreated', service => this.services.push(service));
   }
 
-  readyToDrawMap = {
-    domReady: false,
-    vendorDataReady: false
-  }
-
   attached () {
     this.readyToDrawMap.domReady = true;
     this.drawMap();
-  }
-
-  drawMap() {
-    if (this.readyToDrawMap.domReady && this.readyToDrawMap.vendorDataReady) {
-      let opts = {
-        geo: {latitude: this.vendor.location.coordinates[1], longitude: this.vendor.location.coordinates[0]},
-        mapElementSelector: 'mapfeed',
-        pinCenter: true,
-        type: 'ROADMAP'
-      };
-      this.geo.drawMap(opts);
-    }
   }
 
   async activate(params, routeConfig) {
@@ -50,6 +37,18 @@ export class Posts {
     } catch (err) {
       // TODO flash a global error message
       console.log('error connecting: ', err);
+    }
+  }
+
+  drawMap() {
+    if (this.readyToDrawMap.domReady && this.readyToDrawMap.vendorDataReady) {
+      let opts = {
+        geo: {latitude: this.vendor.location.coordinates[1], longitude: this.vendor.location.coordinates[0]},
+        mapElementSelector: 'mapfeed',
+        pinCenter: true,
+        type: 'ROADMAP'
+      };
+      this.geo.drawMap(opts);
     }
   }
 }

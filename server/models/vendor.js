@@ -14,7 +14,13 @@ let vendor = new Schema({
   description: String,
   address: String,
   urlSegment: String,
-  category: String
+  category: String,
+  logo: String,
+  photos: [{
+      type: Schema.ObjectId,
+      ref: 'photo',
+      autopopulate: true
+    }],
 });
 
 vendor.plugin(SimpleTimestamps);

@@ -9,8 +9,6 @@ class GeoGoogleService {
   constructor(http, eventAggregator) {
     this.http = http;
     this.eventAggregator = eventAggregator;
-
-
   }
 
   placeListingClick(marker) {
