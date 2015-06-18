@@ -1,4 +1,3 @@
-import $ from 'jquery';
 import config from 'utils/layout/config';
 
 export class FooterMain {

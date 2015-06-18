@@ -8,8 +8,6 @@
  *              prevents conflict with other plugins and is a better
  *              way to organize our code.
  */
-import $ from 'jquery';
-
 $.AdminLTE = {};
 
 /* --------------------
