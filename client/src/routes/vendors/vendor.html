@@ -15,13 +15,25 @@
         <li class="active">${vendor.name}</li>
       </ol>
     </section>
-    <section class="content">
+    <section class="content vendor">
       <div class="row">
-        <div class="col-sm-8">
-          <p>${vendor.description}</p>
+        <div class="col-sm-3">
+          <!-- IMAGE AND THUMBS GO HERE -->
+          <div>
+            <img class="img-responsive" src="http://placehold.it/640x480&text=one" alt="${vendor.name}">
+          </div>
+          <div class="space-top space-bottom">
+            <img class="img-thumbnail" src="http://placehold.it/50x50" alt="${vendor.name}">
+            <img class="img-thumbnail" src="http://placehold.it/50x50" alt="${vendor.name}">
+            <img class="img-thumbnail" src="http://placehold.it/50x50" alt="${vendor.name}">
+            <img class="img-thumbnail" src="http://placehold.it/50x50" alt="${vendor.name}">
+          </div>
         </div>
-        <div class="col-sm-4 vendor">
+        <div class="col-sm-5" innerHTML.bind="vendor.description | newLineToBreak">
+        </div>
+        <div class="col-sm-4">
           <map-google></map-google>
+          <h5>Address: <small>${vendor.address}</small></h5>
         </div>
       </div>
       <div class="row">

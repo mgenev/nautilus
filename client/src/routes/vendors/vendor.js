@@ -27,8 +27,9 @@ export class Posts {
 
   async activate(params, routeConfig) {
     try {
+      let query = `{"vendor": "${params.id}"}`;      
       let vendor = await this.http.get(`${this.config.server.url}vendors/${params.id}`);
-      let services = await this.http.get(`${this.config.server.url}services?vendor=${params.id}`);
+      let services = await this.http.get(`${this.config.server.url}services?conditions=${query}`);
       this.vendor = vendor.content;
       this.services = services.content;
       routeConfig.navModel.title = this.vendor.name;
