@@ -3,8 +3,6 @@ import {HttpClient} from 'aurelia-http-client';
 import {Config} from 'services/config';
 import {EventAggregator} from 'aurelia-event-aggregator';
 
-
-@customElement('service-add')
 @inject(HttpClient, Config, EventAggregator)
 export class SayHello {
   @bindable vendor = null;

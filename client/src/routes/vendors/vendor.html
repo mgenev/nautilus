@@ -33,7 +33,9 @@
         </div>
         <div class="col-sm-4">
           <map-google></map-google>
-          <h5>Address: <small>${vendor.address}</small></h5>
+          <h5>Address:
+            <small>${vendor.address}</small>
+          </h5>
         </div>
       </div>
       <div class="row">
@@ -41,7 +43,14 @@
           <service-list services.bind="services"></service-list>
         </div>
         <div class="col-sm-4">
-          <service-add vendor.bind="vendor"></service-list>
+            <button class="btn" click.delegate="openModal()">Add Service</button>
+            <modal showing.bind="showingAddService">
+              <modal-header title="Add Service" close.call="closeModal()"></modal-header>
+              <modal-body content="routes/vendors/service-add"></modal-body>
+              <modal-footer>
+                <au-button text="Cancel" click.call="closeModal()"></au-button>
+              </modal-footer>
+            </modal>
         </div>
       </div>
     </section>

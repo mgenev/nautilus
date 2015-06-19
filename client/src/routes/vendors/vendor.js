@@ -1,12 +1,23 @@
-import {inject} from 'aurelia-framework';
+import {inject, bindable} from 'aurelia-framework';
 import {HttpClient} from 'aurelia-http-client';
 import {Config} from 'services/config';
 import {EventAggregator} from 'aurelia-event-aggregator';
 import {GeoGoogleService} from 'services/geo-google';
 
 @inject(HttpClient, Config, EventAggregator, GeoGoogleService)
-export class Posts {
+export class Vendor {
   heading = 'Single Vendor';
+  showingAddService = false;
+
+  closeModal() {
+    this.showingAddService = false;
+  }
+
+  openModal() {
+    this.showingAddService = true;
+  }
+
+
   readyToDrawMap = {
     domReady: false,
     vendorDataReady: false
@@ -27,7 +38,7 @@ export class Posts {
 
   async activate(params, routeConfig) {
     try {
-      let query = `{"vendor": "${params.id}"}`;      
+      let query = `{"vendor": "${params.id}"}`;
       let vendor = await this.http.get(`${this.config.server.url}vendors/${params.id}`);
       let services = await this.http.get(`${this.config.server.url}services?conditions=${query}`);
       this.vendor = vendor.content;
