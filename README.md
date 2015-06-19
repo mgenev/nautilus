@@ -30,9 +30,3 @@ This project is made for learning. There is no better experience for that than d
 3. `jspm install -y` in /client
 4. run server with ./server node run
 5. run client with ./client/gulp watch
-
-#### Support:
-==========================
-If you have questions about this project, come to the chat for the SANE stack https://gitter.im/artificialio/sane
-
-[gitter-badge-url]: https://gitter.im/artificialio/sane?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge
