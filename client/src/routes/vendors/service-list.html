@@ -1,11 +1,37 @@
 <template>
   <section class="au-animate">
     <div class="row">
-      <div class="col-xs-6">
-        <h4>list of services</h4>
-        <div repeat.for="service of services">
-          <h5><a href="#/services/${service._id}">${service.name}</a></h5>
+      <div class="col-xs-8">
+        <div class="table-responsive">
+          <table class="table no-margin">
+            <thead>
+              <tr>
+                <th>Service</th>
+                <th>Price</th>
+                <th>Popularity</th>
+                <th>Capacity</th>
+                <th>Deposit %</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr repeat.for="service of services">
+                <td><a href="#/services/${service._id}">${service.name}</a></td>
+                <td>
+                  <span class="label label-success">$${service.priceAdult} / ${service.priceChild}</span>
+                </td>
+                <td>
+                  <!-- TODO look up how to use this popularity chart and give it real data so vendor knows what's the hottest service -->
+                  <!-- <div class="sparkbar" data-color="#00a65a" data-height="20">90,80,90,-70,61,-83,63</div> -->
+                  High
+                </td>
+                <td>
+                  <span class="label label-default">${service.minCapacity} / ${service.maxCapacity}</span>
+                </td>
+              </tr>
+            </tbody>
+          </table>
         </div>
+        <!-- /.table-responsive -->
       </div>
     </div>
   </section>

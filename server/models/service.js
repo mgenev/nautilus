@@ -12,7 +12,13 @@ let service = new mongoose.Schema({
   },
   name:String,
   description: String,
-  price: Number
+  terms: String,
+  priceAdult: Number,
+  priceChild: Number,
+  deposit: Number, // percentage stored as decimal
+  category: { type: String, enum: ['activity', 'lodging', 'food', 'education'] },
+  minCapacity: Number,
+  maxCapacity: Number
   // TODO hours, dates available etc. possibly locations
 });
 
