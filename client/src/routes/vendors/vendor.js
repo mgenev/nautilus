@@ -6,7 +6,7 @@ import {GeoGoogleService} from 'services/geo-google';
 
 @inject(HttpClient, Config, EventAggregator, GeoGoogleService)
 // TODO rename to vendorRoute and all other routes too
-export class Vendor {
+export class VendorRoute {
   heading = 'Single Vendor';
 
   readyToDrawMap = {

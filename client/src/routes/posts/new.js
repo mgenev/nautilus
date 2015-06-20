@@ -6,7 +6,7 @@ import {computedFrom} from 'aurelia-framework';
 import {Router} from 'aurelia-router';
 
 @inject(HttpClient, Config, Router, Session)
-export class NewPost {
+export class PostsNewRoute {
   heading = 'Posts';
   endPoint = 'posts';
 

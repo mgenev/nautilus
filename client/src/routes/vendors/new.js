@@ -6,7 +6,7 @@ import {Session} from 'services/session';
 import {GeoGoogleService} from 'services/geo-google';
 
 @inject(HttpClient, Config, Router, Session, GeoGoogleService)
-export class NewVendor {
+export class VendorNewRoute {
   heading = 'Create Vendor';
   endPoint = 'vendors';
   vendor = {};

@@ -4,7 +4,7 @@ import {Config} from 'services/config';
 import {Session} from 'services/session';
 
 @inject(HttpClient, Config, Session)
-export class Vendors {
+export class VendorsIndexRoute {
   heading = 'Vendors';
   vendors = [];
   endPoint = 'vendors';
