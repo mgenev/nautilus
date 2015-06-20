@@ -5,6 +5,7 @@ import {EventAggregator} from 'aurelia-event-aggregator';
 import {GeoGoogleService} from 'services/geo-google';
 
 @inject(HttpClient, Config, EventAggregator, GeoGoogleService)
+// TODO rename to vendorRoute and all other routes too
 export class Vendor {
   heading = 'Single Vendor';
   showingAddService = false;
@@ -17,7 +18,6 @@ export class Vendor {
     this.showingAddService = true;
   }
 
-
   readyToDrawMap = {
     domReady: false,
     vendorDataReady: false
@@ -28,7 +28,10 @@ export class Vendor {
     this.config = config;
     this.ea = ea;
     this.geo = geo;
-    this.ea.subscribe('vendors:serviceCreated', service => this.services.push(service));
+    this.ea.subscribe('vendors:serviceCreated', service => {
+      this.services.push(service);
+      this.closeModal();
+    });
   }
 
   attached () {
