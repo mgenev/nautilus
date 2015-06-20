@@ -3,7 +3,7 @@ import {HttpClient} from 'aurelia-http-client';
 import {Config} from 'services/config';
 
 @inject(HttpClient, Config)
-export class PostRoute {
+export class LogPostRoute {
   heading = 'Single Post';
   endPoint = 'posts';
 
