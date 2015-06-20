@@ -8,15 +8,6 @@ import {GeoGoogleService} from 'services/geo-google';
 // TODO rename to vendorRoute and all other routes too
 export class Vendor {
   heading = 'Single Vendor';
-  showingAddService = false;
-
-  closeModal() {
-    this.showingAddService = false;
-  }
-
-  openModal() {
-    this.showingAddService = true;
-  }
 
   readyToDrawMap = {
     domReady: false,
@@ -30,7 +21,6 @@ export class Vendor {
     this.geo = geo;
     this.ea.subscribe('vendors:serviceCreated', service => {
       this.services.push(service);
-      this.closeModal();
     });
   }
 

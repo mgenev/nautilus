@@ -2,19 +2,32 @@ import {customElement, bindable, inject} from 'aurelia-framework';
 import {HttpClient} from 'aurelia-http-client';
 import {Config} from 'services/config';
 import {EventAggregator} from 'aurelia-event-aggregator';
-import {Vendor} from 'routes/vendors/vendor';
+// import {Vendor} from 'routes/vendors/vendor';
 
-@inject(HttpClient, Config, EventAggregator, Vendor)
+@customElement('service-add')
+@inject(HttpClient, Config, EventAggregator)
 export class SayHello {
   @bindable vendor = null;
   endPoint = 'services';
   service = {};
 
-  constructor(http, config, ea, vendor) {
+  showingAddService = false;
+
+  closeModal() {
+    this.showingAddService = false;
+  }
+
+  openModal() {
+    this.showingAddService = true;
+  }
+
+  wizardSteps = ['basicInfo', 'pricing', 'capacity', 'terms'];
+
+  constructor(http, config, ea) {
     this.http = http;
     this.config = config;
     this.ea = ea;
-    this.vendor = vendor.vendor;
+    // this.vendor = vendor.vendor;
   }
 
   async createService() {
@@ -26,6 +39,7 @@ export class SayHello {
         console.log(this.service[prop]);
         this.service[prop] = '';
       };
+      this.closeModal();
       this.ea.publish('vendors:serviceCreated', newService.content);
     } catch (err) {
       // TODO flash a global error message

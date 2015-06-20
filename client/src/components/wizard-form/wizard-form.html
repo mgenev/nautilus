@@ -1,0 +1,34 @@
+<template>
+  <div class="wizard-wrapper row">
+
+    <div class="wizard">
+        <!-- TODO List steps -->
+        <!-- {{#each steps as |step index|}}
+            <div {{action 'goToStep' index}} class="wizard-step pull-left">{{index}}. {{step.caption}}</div>
+        {{/each}} -->
+    </div>
+
+    <div class="clear wizard-form">
+        <!-- <form role="form" {{action 'submitAction' status on='submit'}}> -->
+        <form submit.delegate="submitForm()" role="form">
+          <!-- TODO dynamically render the active step -->
+          <!-- {{#liquid-with type class="wizard" as |t|}}
+            {{component t status=status}}
+          {{/liquid-with}} -->
+
+          <div class="space-top"></div>
+          <!-- TODO show next-prev buttons when they belong -->
+          <!-- {{#unless firstStep}}
+              <div {{action 'prevStep'}} class="btn btn-info">Previous</div>
+          {{/unless}}
+
+          {{#unless lastStep}}
+              <div {{action 'nextStep'}} class="btn btn-info">Next</div>
+            {{else}}
+              <button {{action 'submitAction' status}} type="submit" class="btn btn-default">Submit</button>
+          {{/unless}} -->
+        </form>
+        <div class="space-bottom"></div>
+    </div>
+</div>
+</template>

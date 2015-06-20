@@ -1,8 +1,8 @@
 <template>
   <require from='components/layout-admin/layout-admin'></require>
   <require from='components/map-google/map-google'></require>
-  <require from='./service-list'></require>
-  <require from='./service-add'></require>
+  <require from='./services/service-list'></require>
+  <require from='./services/service-add'></require>
   <layout-admin>
     <section class="content-header">
       <h1>${vendor.name}
@@ -42,15 +42,8 @@
         <div class="col-sm-8">
           <service-list services.bind="services"></service-list>
         </div>
-        <div class="col-sm-4">
-          <button class="btn" click.delegate="openModal()">Add Service</button>
-          <modal showing.bind="showingAddService">
-            <modal-header title="Add Service" close.call="closeModal()"></modal-header>
-            <modal-body content="routes/vendors/service-add"></modal-body>
-            <modal-footer>
-              <au-button text="Cancel" click.call="closeModal()"></au-button>
-            </modal-footer>
-          </modal>
+        <div class="col-sm-4">          
+          <service-add vendor.bind="vendor"></service-add>
         </div>
       </div>
     </section>
