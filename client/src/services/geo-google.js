@@ -104,7 +104,7 @@ class GeoGoogleService {
     window.infoWindow = new google.maps.InfoWindow();
     window.map = new google.maps.Map(document.getElementById(options.mapElementSelector), {
       center: center,
-      zoom: 15,
+      zoom: 10,
       mapTypeId: google.maps.MapTypeId[options.type]
     });
 

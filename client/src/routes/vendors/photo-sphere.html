@@ -1,0 +1,25 @@
+<template>
+  <button class="btn" click.delegate="openPhotoSphere()">Photo Sphere</button>
+  <modal showing.bind="showingPhotoSphere">
+    <modal-header title="Photo Sphere" close.call="closePhotoSphere()"></modal-header>
+    <modal-body>
+      <center>
+      <div if.bind="showingSphere1">
+        <iframe width="100%" height="620" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.com/maps?layer=c&amp;panoid=Vo4d3yeizUIAAAQqg0BSJg&amp;ie=UTF8&amp;source=embed&amp;output=svembed&amp;cbp=13%2C178.35959999999997%2C%2C0%2C0"></iframe>
+      </div>
+      <div if.bind="showingSphere2">
+        <iframe width="100%" height="620" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.com/maps?layer=c&amp;panoid=f6xnhmZJPS8AAAQqg0BSJQ&amp;ie=UTF8&amp;source=embed&amp;output=svembed&amp;cbp=13%2C63.40640000000002%2C%2C0%2C0"></iframe>
+      </div>
+      <div if.bind="showingStreetView">
+        <iframe width="100%" height="620" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.com/maps?layer=c&amp;panoid=9npXB_ZsnSYAAAQqg0l7IA&amp;ie=UTF8&amp;source=embed&amp;output=svembed&amp;cbp=13%2C257.7672%2C%2C0%2C-7"></iframe>
+      </div>
+      </center>
+    </modal-body>
+    <modal-footer>
+      <au-button text="Close" click.call="closePhotoSphere()"></au-button>
+      <au-button text="Prev Sphere" click.call="prevSphere()"></au-button>
+      <au-button text="Next Sphere" click.call="nextSphere()"></au-button>
+      <au-button text="Street View" click.call="showStreetView()"></au-button>
+    </modal-footer>
+  </modal>
+</template>

@@ -3,6 +3,7 @@
   <require from='components/map-google/map-google'></require>
   <require from='./services/service-list'></require>
   <require from='./services/service-add'></require>
+  <require from='./photo-sphere'></require>
   <layout-admin>
     <section class="content-header">
       <h1>${vendor.name}
@@ -20,13 +21,13 @@
         <div class="col-sm-3">
           <!-- IMAGE AND THUMBS GO HERE -->
           <div>
-            <img class="img-responsive" src="http://placehold.it/640x480&text=one" alt="${vendor.name}">
+            <img class="img-responsive" src="http://lorempixel.com/640/480/animals/" alt="${vendor.name}">
           </div>
           <div class="space-top space-bottom">
-            <img class="img-thumbnail" src="http://placehold.it/50x50" alt="${vendor.name}">
-            <img class="img-thumbnail" src="http://placehold.it/50x50" alt="${vendor.name}">
-            <img class="img-thumbnail" src="http://placehold.it/50x50" alt="${vendor.name}">
-            <img class="img-thumbnail" src="http://placehold.it/50x50" alt="${vendor.name}">
+            <img class="img-thumbnail" src="http://lorempixel.com/50/50/animals/" alt="${vendor.name}">
+            <img class="img-thumbnail" src="http://lorempixel.com/50/50/animals/" alt="${vendor.name}">
+            <img class="img-thumbnail" src="http://lorempixel.com/50/50/animals/" alt="${vendor.name}">
+            <img class="img-thumbnail" src="http://lorempixel.com/50/50/animals/" alt="${vendor.name}">
           </div>
         </div>
         <div class="col-sm-5" innerHTML.bind="vendor.description | newLineToBreak">
@@ -42,8 +43,9 @@
         <div class="col-sm-8">
           <service-list services.bind="services"></service-list>
         </div>
-        <div class="col-sm-4">          
+        <div class="col-sm-4">
           <service-add vendor.bind="vendor"></service-add>
+          <photo-sphere></photo-sphere>
         </div>
       </div>
     </section>
