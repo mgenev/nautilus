@@ -1,7 +1,7 @@
-import config from 'utils/layout/config';
+import 'utils/layout/config';
 
 export class FooterMain {
-  attached () {
+  attached() {
 
     //Extend options if external options exist
     if (typeof AdminLTEOptions !== "undefined") {

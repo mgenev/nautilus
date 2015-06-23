@@ -1,9 +1,6 @@
-import config from 'utils/layout/config';
-import slimscroll from 'utils/layout/slimscroll';
-
 export class HeaderMain {
   attached() {
-    var o = $.AdminLTE.options;
+    let o = $.AdminLTE.options;
     //Add slimscroll to navbar dropdown
     if (o.navbarMenuSlimscroll && typeof $.fn.slimScroll != 'undefined') {
 

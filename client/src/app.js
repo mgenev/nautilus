@@ -1,10 +1,12 @@
 import 'bootstrap';
+import 'utils/layout/slimscroll';
+import 'jquery';
 
 export class App {
   configureRouter(config, router){
     config.title = 'Nautilus';
     config.map([
-      { route: ['','home'],      moduleId: './routes/home/index',      nav: true, title:'Welcome' },
+      { route: ['', 'home'],      moduleId: './routes/home/index',      nav: true, title:'Welcome' },
       { route: 'geo-demo',       moduleId: './routes/geo/index',     nav: true, title: 'Geo Demo' },
       { route: 'log',          moduleId: './routes/log/index',     name: 'posts', nav: true, title: 'Posts' },
       { route: 'log/post/:id',      moduleId: './routes/log/post',      name: 'postById'},
