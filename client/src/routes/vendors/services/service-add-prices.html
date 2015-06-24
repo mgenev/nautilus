@@ -1,0 +1,22 @@
+<template>
+  <div class="form-group">
+    <label for="price-adult">Adult Price</label>
+    <input value.bind="model.priceAdult" class="form-control" id="price-adult" placeholder="Adult Price in USD">
+  </div>
+  <div class="form-group">
+    <label for="price-child">Child Price</label>
+    <input value.bind="model.priceChild" class="form-control" id="price-adult" placeholder="Child Price in USD">
+  </div>
+  <div class="form-group">
+    <label for="deposit">Deposit %</label>
+    <input value.bind="model.deposit" class="form-control" id="deposit" placeholder="Percentage">
+  </div>
+  <div class="form-group">
+    <label for="min-acapcity">Minimum Capacity</label>
+    <input value.bind="model.minCapacity" class="form-control" id="min-capacity" placeholder="Minimum Capacity">
+  </div>
+  <div class="form-group">
+    <label for="max-acapcity">Maximum Capacity</label>
+    <input value.bind="model.maxCapacity" class="form-control" id="max-capacity" placeholder="Maximum Capacity">
+  </div>
+</template>

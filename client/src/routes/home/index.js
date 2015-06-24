@@ -9,8 +9,4 @@ export class HomeIndexRoute {
   get fullName(){
     return `${this.firstName} ${this.lastName}`;
   }
-
-  welcome(){
-    alert(`Welcome, ${this.fullName}!`);
-  }
 }
