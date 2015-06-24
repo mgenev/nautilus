@@ -7,6 +7,7 @@ export class WizardForm {
   activeStep = 0;
   attached() {
     this.addActiveClass();
+    console.log('MODEL', this.model);
   }
 
   @computedFrom('activeStep')

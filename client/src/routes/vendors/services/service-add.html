@@ -5,7 +5,7 @@
     <modal showing.bind="showingAddService">
       <modal-header title="Add Service" close.call="closeModal()"></modal-header>
       <modal-body>
-        <wizard-form model.bind="service" steps.bind="serviceAddSteps"></wizard-form>
+        <wizard-form model.two-way="service" steps.bind="serviceAddSteps"></wizard-form>
       </modal-body>
       <modal-footer>
         <au-button text="Cancel" click.call="closeModal()"></au-button>

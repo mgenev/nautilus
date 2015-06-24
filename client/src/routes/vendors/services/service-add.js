@@ -14,17 +14,17 @@ export class SayHello {
 
   @bindable vendor = null;
   endPoint = 'services';
-  service = {};
+  service = {test: 'testis'};
   serviceAddSteps = [{
-      path: 'routes/vendors/services/service-add-basic-info',
+      path: 'routes/vendors/services/service-add-basic-info.html',
       caption : 'Basic Info'
     },
     {
-      path: 'routes/vendors/services/service-add-prices',
+      path: 'routes/vendors/services/service-add-prices.html',
       caption : 'Prices and Capacity'
     },
     {
-      path: 'routes/vendors/services/service-add-terms',
+      path: 'routes/vendors/services/service-add-terms.html',
       caption : 'Terms of Agreement'
     }];
   showingAddService = false;

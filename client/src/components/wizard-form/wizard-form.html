@@ -4,14 +4,12 @@
         <span repeat.for="step of steps" click.delegate="$parent.goToStep($index)" class="wizard-step ">${$index+1} ${step.caption}</span>
     </div>
     <div class="clearfix wizard-form">
-      <compose model.bind="model" view-model="${steps[activeStep].path}"></compose>
+      <compose model.two-way="model" view="${steps[activeStep].path}"></compose>
       <div class="space-top"></div>
       <div class="pull-right">
         <div if.bind="!firstStep" click.trigger="prevStep()" class="btn btn-info">Previous</div>
         <div if.bind="!lastStep" click.trigger="nextStep()" class="btn btn-info">Next</div>
-      </div>
-      <!-- TODO pass submitAction properly -->
-      <!-- <button if.bind="lastStep" click.trigger="submitAction()" type="submit" class="btn btn-default">Submit</button> -->
+      </div>      
       <div class="space-bottom"></div>
     </div>
   </div>
