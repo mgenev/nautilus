@@ -3,13 +3,13 @@
     <div class="wizard">
         <span repeat.for="step of steps" click.delegate="$parent.goToStep($index)" class="wizard-step ">${$index+1} ${step.caption}</span>
     </div>
-    <div class="clearfix wizard-form">
+    <div class="clearfix wizard-form space-top">
       <compose model.two-way="model" view="${steps[activeStep].path}"></compose>
       <div class="space-top"></div>
       <div class="pull-right">
         <div if.bind="!firstStep" click.trigger="prevStep()" class="btn btn-info">Previous</div>
         <div if.bind="!lastStep" click.trigger="nextStep()" class="btn btn-info">Next</div>
-      </div>      
+      </div>
       <div class="space-bottom"></div>
     </div>
   </div>
