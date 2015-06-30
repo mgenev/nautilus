@@ -61,6 +61,7 @@
       "aurelia-animator-css": "github:aurelia/animator-css@^0.3.0",
       "aurelia-bootstrapper": "github:aurelia/bootstrapper@^0.13.0",
       "aurelia-bs-modal": "github:pwkad/aurelia-bs-modal@^0.1.2",
+      "aurelia-computed": "github:jdanyow/aurelia-computed@^0.2.0",
       "aurelia-dependency-injection": "github:aurelia/dependency-injection@^0.8.1",
       "aurelia-framework": "github:aurelia/framework@^0.12.0",
       "aurelia-http-client": "github:aurelia/http-client@^0.9.1",

@@ -3,7 +3,8 @@ export function configure(aurelia) {
     .standardConfiguration()
     .developmentLogging()
     .plugin('./utils/index')
-    .plugin('aurelia-bs-modal');
+    .plugin('aurelia-bs-modal')
+    .plugin('aurelia-computed');
     // .plugin('aurelia-animator-css');
 
 
